@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"api", "server"})
+@ComponentScan(basePackages = {"api", "server", "persistence"})
 public class StartServer {
     public static void main(String[] args) {
         SpringApplication.run(StartServer.class, args);

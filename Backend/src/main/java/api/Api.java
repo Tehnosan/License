@@ -1,7 +1,9 @@
 package api;
 
+import domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import server.Server;
 
@@ -10,11 +12,11 @@ public class Api {
     @Autowired
     private Server server;
 
-    @GetMapping("/login")
-    public String getS(){
-        System.out.println("all good");
-
-        this.server.f();
+    @PostMapping("/login")
+    public String getS(@RequestBody User user){
+        System.out.println(this.server.getLoggedUsers());
+        this.server.login(user.getUsername(), user.getPassword());
+        System.out.println(this.server.getLoggedUsers());
 
         return "all good ui";
     }
