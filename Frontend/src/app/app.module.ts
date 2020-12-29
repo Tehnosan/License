@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/main-page/navbar/navbar.component';
 import { MaterialModule } from './app.material-module';
 import { LoginComponent } from './components/open-page/login/login.component';
+import { RecipesComponent } from './components/main-page/recipes/recipes.component';
 
 
 
@@ -15,7 +16,8 @@ import { LoginComponent } from './components/open-page/login/login.component';
   declarations: [
     AppComponent,
     NavbarComponent,
-    LoginComponent
+    LoginComponent,
+    RecipesComponent
   ],
   imports: [
       HttpClientModule,

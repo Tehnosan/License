@@ -1,0 +1,6 @@
+<app-navbar></app-navbar>
+
+<div *ngFor="let recipe of recipes" class="margin">
+  <img src="{{recipe.url}}" alt="{{recipe.url}}" class="middle block">
+  <h1 class="middle">{{recipe.name}}</h1>
+</div>

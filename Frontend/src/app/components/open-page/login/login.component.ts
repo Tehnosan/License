@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
           this.hasLoginError = true;
         }
         else {
-          this.router.navigateByUrl('/navbar');
+          this.router.navigateByUrl('/main');
         }
       });
   }
