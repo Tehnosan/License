@@ -1,0 +1,24 @@
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+#centerFormPosition {
+  max-width: 300px;
+
+  margin: 100px auto auto;
+  padding: 10px;
+
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgb(63, 81, 181);
+}
+
+.middleTextPosition {
+  text-align: center;
+}
+
+.full-width{
+  width: 100%;
+}
+
+#title {
+  font-weight: bold;
+  color: deeppink;
+}

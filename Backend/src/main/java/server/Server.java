@@ -20,18 +20,25 @@ public class Server {
         this.loggedUsers = new ArrayList<>();
     }
 
-    public void login(String username, String password) {
-        if(this.userRepo.findOne(username, password) != null) {
+    public User login(String username, String password) {
+        System.out.println("server - login");
+
+        User user = this.userRepo.findOne(username, password);
+
+        if(user != null) {
             if(this.loggedUsers.contains(username)) {
                 System.out.println("Already logged in!");
             }
-            this.loggedUsers.add(username);
-            System.out.println("user logged in");
+            else {
+                this.loggedUsers.add(username);
+                System.out.println("user logged in");
+            }
         }
         else {
             System.out.println("Authentication failed!");
         }
-        System.out.println("server - login");
+
+        return user;
     }
 
     public List<String> getLoggedUsers(){

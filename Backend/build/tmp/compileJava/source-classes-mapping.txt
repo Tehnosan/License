@@ -2,12 +2,11 @@ domain/User.java
  domain.User
 persistence/database_connectivity/JDBC.java
  persistence.database_connectivity.JDBC
-server/Server.java
- server.Server
-persistence/repositories/UserRepo.java
- persistence.repositories.UserRepo
 start/StartServer.java
  start.StartServer
+persistence/repositories/UserRepo.java
+ persistence.repositories.UserRepo
+server/Server.java
+ server.Server
 api/Api.java
  api.Api
- api.Api$Re
