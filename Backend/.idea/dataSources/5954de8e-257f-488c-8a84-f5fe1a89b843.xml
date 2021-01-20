@@ -31,7 +31,7 @@
     </column>
     <column id="12" parent="6" name="url">
       <Position>3</Position>
-      <DataType>varchar(50)|0s</DataType>
+      <DataType>varchar(500000)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
     <index id="13" parent="6" name="Recipes_id_uindex">

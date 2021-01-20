@@ -1,23 +1,48 @@
 img {
   width: 400px;
   height: auto;
-
-
 }
 
-h1 {
-  width: 400px;
-}
+/*h1 {*/
+/*  width: 400px;*/
+/*}*/
 
-.middle {
+/*.middle {*/
+/*  margin-left: auto;*/
+/*  margin-right: auto;*/
+/*}*/
+
+/*.block {*/
+/*  display: block;*/
+/*}*/
+
+/*.margin {*/
+/*  margin: 10px;*/
+/*}*/
+
+.sideMargin {
   margin-left: auto;
   margin-right: auto;
+
+  width: 900px;
 }
 
-.block {
+.card {
+  height: 350px;
+}
+
+.bottomPosition {
+  position: absolute;
+  bottom: 15px;
+}
+
+:host {
+  background-color: rgb(230, 230, 230);
   display: block;
 }
 
-.margin {
-  margin: 10px;
+.red {
+  fill: red;
 }
+
+
