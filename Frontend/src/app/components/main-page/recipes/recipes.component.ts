@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit } from '@angular/core';
 import {Recipe} from '../../../models/recipe';
 import {RecipeService} from '../../../services/recipe-service/recipe.service';
 

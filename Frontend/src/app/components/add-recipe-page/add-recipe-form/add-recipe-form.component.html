@@ -1,1 +1,34 @@
-<p>add-recipe-form works!</p>
+<div class="add-recipe-form">
+  <div class="middle">
+    <label id="title">Recipe</label>
+  </div>
+
+  <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="standard" class="full-width">
+      <mat-label>Name</mat-label>
+      <input matInput type="text" placeholder="Name" formControlName="name">
+    </mat-form-field>
+
+    <mat-form-field>
+      <div>
+        <mat-toolbar>
+          <!-- Display files names -->
+          <input matInput [(ngModel)]="fileAttr" readonly name="name" />
+
+          <!-- Browse Button -->
+          <button mat-flat-button color="primary">
+            Browse File
+          </button>
+        </mat-toolbar>
+
+        <!-- Fetch selected filed on change -->
+        <input type="file" #fileInput id="uploadFile" (change)="uploadFileEvt($event)" name="uploadFile" multiple="multiple"
+               accept="image/*" />
+      </div>
+    </mat-form-field>
+
+    <div class="middle">
+      <button type="submit" mat-raised-button color="primary">Submit</button>
+    </div>
+  </form>
+</div>
