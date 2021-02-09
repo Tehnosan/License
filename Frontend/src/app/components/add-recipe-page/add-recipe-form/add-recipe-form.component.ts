@@ -1,5 +1,7 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {AuthService} from '../../../services/auth-service/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-add-recipe-form',
@@ -9,44 +11,39 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class AddRecipeFormComponent implements OnInit {
   @ViewChild('fileInput') fileInput: ElementRef;
   fileAttr = 'Choose File';
+  imageURL: string;
 
-  constructor() { }
+  constructor(private elementRef: ElementRef){
 
-  file: File | null = null;
+  }
+
   recipeForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
-    image: new FormControl('', [Validators.required]),
   });
 
   ngOnInit(): void {
+    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = 'rgb(231, 176, 255)';
   }
 
   onSubmit(): void {
-    const x = 6;
+
   }
 
-  uploadFileEvt(imgFile: any): void {
-    // if (imgFile.target.files && imgFile.target.files[0]) {
-    //   this.fileAttr = '';
-    //   Array.from(imgFile.target.files).forEach((file: File) => {
-    //     this.fileAttr += file.name + ' - ';
-    //   });
-    //
-    //   // HTML5 FileReader API
-    //   let reader = new FileReader();
-    //   reader.onload = (e: any) => {
-    //     let image = new Image();
-    //     image.src = e.target.result;
-    //     image.onload = rs => {
-    //       let imgBase64Path = e.target.result;
-    //     };
-    //   };
-    //   reader.readAsDataURL(imgFile.target.files[0]);
-    //
-    //   // Reset if duplicate image uploaded again
-    //   this.fileInput.nativeElement.value = "";
-    // } else {
-    //   this.fileAttr = 'Choose File';
-    // }
+  uploadFileEvt(event): void {
+    if (event.target.files && event.target.files[0]) {
+      this.fileAttr = event.target.files[0].name;
+
+      // HTML5 FileReader API
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imageURL = reader.result as string;
+      };
+      reader.readAsDataURL(event.target.files[0]);
+
+      // Reset if duplicate image uploaded again
+      this.fileInput.nativeElement.value = '';
+    } else {
+      this.fileAttr = 'Choose File';
+    }
   }
 }
