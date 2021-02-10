@@ -1,15 +1,22 @@
+<!-- form container -->
 <div class="add-recipe-form">
+
+  <!--  form title  -->
   <div class="middle">
     <label class="title">Recipe</label>
   </div>
 
+  <!-- recipe form -->
   <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
-    <mat-form-field appearance="standard">
+
+    <!--  recipe name input  -->
+    <mat-form-field appearance="standard" class="full-width">
       <mat-label>Name</mat-label>
       <input matInput type="text" placeholder="Name" formControlName="name">
     </mat-form-field>
 
-    <mat-form-field appearance="standard">
+    <!-- upload photo input -->
+    <mat-form-field appearance="standard" class="full-width">
       <div>
         <mat-toolbar class="no-padding-left">
           <!-- Display files names -->
@@ -24,10 +31,91 @@
       </div>
     </mat-form-field>
 
-    <div >
+    <!-- image uploaded -->
+    <div>
       <img [src]="imageURL" alt="">
     </div>
 
+    <!-- ingredients container -->
+    <div>
+      <!-- ingredients title -->
+      <label class="title">Ingredients</label>
+      <!-- showing ingredient components  -->
+      <div *ngFor="let ingredient of getIngredients.controls; let i = index">
+        <!-- ingredient form -->
+        <div [formGroup]="ingredient" class="multiple-container">
+
+          <!-- ingredient name input -->
+          <mat-form-field appearance="standard" class="ingredient">
+            <mat-label>Ingredient {{i + 1}}</mat-label>
+            <input matInput type="text" placeholder="Ingredient" formControlName="ingredient">
+          </mat-form-field>
+
+          <!-- ingredient quantity input -->
+          <mat-form-field appearance="standard" class="quantity">
+            <mat-label>Quantity</mat-label>
+            <input matInput type="text" placeholder="Quantity" formControlName="quantity">
+          </mat-form-field>
+
+          <!-- ingredient remove button -->
+          <div>
+            <button mat-mini-fab color="primary" type="button" class="mini-button" (click)="removeIngredient(i)">
+              <mat-icon>remove</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- add new ingredient button -->
+      <div>
+        <button mat-mini-fab color="primary" type="button" class="mini-button top-margin" (click)="addNewIngredient()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <mat-error *ngIf="ingredientsError" class="full-width">
+      Need at least one ingredient!
+    </mat-error>
+
+    <!-- steps container -->
+    <div class="top-margin">
+      <label class="title">Steps</label>
+
+      <!-- showing step components  -->
+      <div *ngFor="let step of getSteps.controls; let i = index">
+        <!-- steps form -->
+        <div [formGroup]="step" class="multiple-container">
+
+          <!-- step textarea input -->
+          <mat-form-field class="step">
+            <mat-label>Step {{i + 1}}</mat-label>
+            <textarea matInput formControlName="step"></textarea>
+          </mat-form-field>
+
+          <!-- step remove button -->
+          <div>
+            <button mat-mini-fab color="primary" type="button" class="mini-button" (click)="removeStep(i)">
+              <mat-icon>remove</mat-icon>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- add new step button -->
+      <div>
+        <button mat-mini-fab color="primary" type="button" class="mini-button top-margin" (click)="addNewStep()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <mat-error *ngIf="stepsError" class="full-width">
+      Need at least one step!
+    </mat-error>
+
+    <!-- submit button -->
     <div class="middle">
       <button type="submit" mat-raised-button color="primary">Submit</button>
     </div>
