@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 
-<mat-grid-list cols="2" rowHeight="400px" class="sideMargin">
+<mat-grid-list cols="2" rowHeight="450px" class="sideMargin">
   <mat-grid-tile *ngFor="let recipe of recipes">
     <mat-card>
       <mat-card-header>
@@ -24,8 +24,10 @@
   </mat-grid-tile>
 </mat-grid-list>
 
-<!--<input type="file" (change)="fileEvent($event)"/>-->
-<!--<button (click)="btnUpload()">Upload Image</button>-->
-<!--<img src="{{imageUrl}}" alt="abc">-->
+<div class="add-button">
+  <button mat-mini-fab color="primary" (click)="handleAddButton()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
 
 

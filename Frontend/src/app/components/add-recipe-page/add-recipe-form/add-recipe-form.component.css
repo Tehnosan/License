@@ -3,7 +3,7 @@
   min-width: 400px;
 
   padding: 10px;
-  margin: 100px auto;
+  margin: 100px auto 100px;
 
   border-radius: 5px;
 
@@ -19,9 +19,14 @@
 
 .title {
   font-weight: bold;
-  /*color: deeppink;*/
   color: rgb(89, 1, 128);
   font-size: 25px;
+}
+
+.header {
+  font-weight: bold;
+  color: rgb(89, 1, 128);
+  font-size: 20px;
 }
 
 img {

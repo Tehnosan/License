@@ -23,6 +23,12 @@ public class Api {
     public List<Recipe> getR() {
         return this.server.getRecipes();
     }
+
+    @PostMapping("/add-recipe")
+    public Object addRecipe(@RequestBody Object recipe) {
+        System.out.println(recipe);
+        return recipe;
+    }
 //
 //    @GetMapping("/recipes/{id}")
 //    public Re getRe() {

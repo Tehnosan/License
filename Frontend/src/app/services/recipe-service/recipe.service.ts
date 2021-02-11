@@ -19,4 +19,8 @@ export class RecipeService {
   getRecipes(): Observable<Recipe[]> {
     return this.http.get<Recipe[]>(`${this.backendUrl}/recipes`);
   }
+
+  addRecipe(recipe: { name, url, ingredients, quantities, steps }): Observable<any> {
+    return this.http.post<any>(`${this.backendUrl}/add-recipe`, recipe, this.httpOptions);
+  }
 }

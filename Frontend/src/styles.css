@@ -4,7 +4,18 @@
 
 html, body {
   height: 100%;
-  /*background-color: rgb(245,223,77);*/
   background-color: rgb(255, 247, 185);
 }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.wrapper {
+  min-height: 100%;
+
+  margin-bottom: -150px;
+}
+footer, .push {
+  height: 150px;
+}
+
+footer {
+  background-color: rgb(103, 58, 183);
+}

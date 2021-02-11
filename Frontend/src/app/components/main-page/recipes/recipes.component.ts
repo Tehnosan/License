@@ -1,6 +1,7 @@
 import {Component, OnInit } from '@angular/core';
 import {Recipe} from '../../../models/recipe';
 import {RecipeService} from '../../../services/recipe-service/recipe.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-recipes',
@@ -10,11 +11,7 @@ import {RecipeService} from '../../../services/recipe-service/recipe.service';
 export class RecipesComponent implements OnInit {
   recipes: Recipe[] = [];
 
-  // filedata: any;
-  // imageData: any;
-  // imageUrl: string;
-
-  constructor(private recipeService: RecipeService) { }
+  constructor(private recipeService: RecipeService, private router: Router) { }
 
   ngOnInit(): void {
     this.getRecipes();
@@ -33,32 +30,8 @@ export class RecipesComponent implements OnInit {
       event.target.classList.add('red');
     }
   }
-  /* File onchange event */
-  // fileEvent(e): void {
-  //   this.filedata = e.target.files[0];
-  //
-  //   const reader = new FileReader();
-  //   reader.readAsDataURL(this.filedata);
-  //
-  //   reader.onload = () => {
-  //     console.log('XXXXXXXXXXXXXXXXXXXXXXX');
-  //     console.log(reader.result);
-  //     this.imageData = reader.result;
-  //   };
-  //   reader.onerror = (error) => {
-  //     console.log('Error: ', error);
-  //   };
-  // }
 
-  // btnUpload(): void {
-  //
-  //   if (this.imageData == null) {
-  //     alert('Please select file');
-  //   } else{
-  //     this.imageUrl = this.imageData.toString();
-  //     console.log('AAAAAAAAAAAAAAAAAAAAAAAAA');
-  //     console.warn(this.imageUrl);
-  //   }
-  // }
-
+  handleAddButton(): void {
+    this.router.navigateByUrl('/add');
+  }
 }

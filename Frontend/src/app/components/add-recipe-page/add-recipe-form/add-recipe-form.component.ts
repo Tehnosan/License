@@ -5,6 +5,7 @@ import {
   ViewChild
 } from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {RecipeService} from '../../../services/recipe-service/recipe.service';
 
 @Component({
   selector: 'app-add-recipe-form',
@@ -21,7 +22,7 @@ export class AddRecipeFormComponent implements OnInit {
   ingredientsError = false;
   stepsError = false;
 
-  constructor(private formBuilder: FormBuilder){
+  constructor(private formBuilder: FormBuilder, private recipeService: RecipeService){
   }
 
   ngOnInit(): void {
@@ -78,8 +79,30 @@ export class AddRecipeFormComponent implements OnInit {
       this.stepsError = true;
     }
 
-    for (const control of this.getIngredients.controls) {
-      console.log(control.get('ingredient').value + ' ' + control.get('quantity').value);
+    if (this.ingredientsError === false && this.stepsError === false) {
+      const ingredients = this.getIngredients;
+      const steps = this.getSteps;
+
+      let ingredientsNames = '';
+      let quantitiesAsString = '';
+      ingredients.controls.forEach(ingredient => {
+        ingredientsNames += ingredient.value.ingredient;
+        ingredientsNames += '-';
+        quantitiesAsString += ingredient.value.quantity;
+        quantitiesAsString += '-';
+      });
+
+      let stepsAsString = '';
+      steps.controls.forEach(step => {
+        stepsAsString += step.value.step;
+        stepsAsString += '-';
+      });
+
+      ingredientsNames = ingredientsNames.slice(0, -1);
+      quantitiesAsString = quantitiesAsString.slice(0, -1);
+      stepsAsString = stepsAsString.slice(0, -1);
+
+      this.recipeService.addRecipe({ name: this.getFormControls.name.value, url: this.imageURL, ingredients: ingredientsNames, quantities: quantitiesAsString, steps: stepsAsString }).subscribe(res => console.log(res));
     }
   }
 
@@ -91,6 +114,7 @@ export class AddRecipeFormComponent implements OnInit {
       const reader = new FileReader();
       reader.onload = () => {
         this.imageURL = reader.result as string;
+        console.log(this.imageURL);
       };
       reader.readAsDataURL(event.target.files[0]);
 
