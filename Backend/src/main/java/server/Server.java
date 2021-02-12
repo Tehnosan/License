@@ -51,6 +51,10 @@ public class Server {
         return this.recipeRepo.getRecipes();
     }
 
+    public Recipe addRecipe(Recipe recipe) {
+        return this.recipeRepo.addRecipe(recipe);
+    }
+
     public List<String> getLoggedUsers(){
         return this.loggedUsers;
     }

@@ -6,6 +6,7 @@ import {
 } from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {RecipeService} from '../../../services/recipe-service/recipe.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-add-recipe-form',
@@ -22,7 +23,7 @@ export class AddRecipeFormComponent implements OnInit {
   ingredientsError = false;
   stepsError = false;
 
-  constructor(private formBuilder: FormBuilder, private recipeService: RecipeService){
+  constructor(private formBuilder: FormBuilder, private recipeService: RecipeService, private router: Router){
   }
 
   ngOnInit(): void {
@@ -103,6 +104,8 @@ export class AddRecipeFormComponent implements OnInit {
       stepsAsString = stepsAsString.slice(0, -1);
 
       this.recipeService.addRecipe({ name: this.getFormControls.name.value, url: this.imageURL, ingredients: ingredientsNames, quantities: quantitiesAsString, steps: stepsAsString }).subscribe(res => console.log(res));
+
+      this.router.navigateByUrl('/main');
     }
   }
 

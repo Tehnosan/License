@@ -25,9 +25,8 @@ public class Api {
     }
 
     @PostMapping("/add-recipe")
-    public Object addRecipe(@RequestBody Object recipe) {
-        System.out.println(recipe);
-        return recipe;
+    public Recipe addRecipe(@RequestBody Recipe recipe) {
+        return this.server.addRecipe(recipe);
     }
 //
 //    @GetMapping("/recipes/{id}")

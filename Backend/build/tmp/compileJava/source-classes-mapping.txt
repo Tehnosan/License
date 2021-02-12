@@ -6,11 +6,11 @@ start/StartServer.java
  start.StartServer
 persistence/repositories/UserRepo.java
  persistence.repositories.UserRepo
-server/Server.java
- server.Server
-persistence/repositories/RecipeRepo.java
- persistence.repositories.RecipeRepo
 domain/Recipe.java
  domain.Recipe
+persistence/repositories/RecipeRepo.java
+ persistence.repositories.RecipeRepo
+server/Server.java
+ server.Server
 api/Api.java
  api.Api
