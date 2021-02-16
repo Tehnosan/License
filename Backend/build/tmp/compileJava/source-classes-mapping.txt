@@ -1,16 +1,38 @@
-domain/User.java
- domain.User
-persistence/database_connectivity/JDBC.java
- persistence.database_connectivity.JDBC
-start/StartServer.java
- start.StartServer
-persistence/repositories/UserRepo.java
- persistence.repositories.UserRepo
-domain/Recipe.java
- domain.Recipe
-persistence/repositories/RecipeRepo.java
- persistence.repositories.RecipeRepo
-server/Server.java
- server.Server
-api/Api.java
- api.Api
+backend/authentication/repo/UserRepo.java
+ backend.authentication.repo.UserRepo
+backend/authentication/model/response/ResponseMessage.java
+ backend.authentication.model.response.ResponseMessage
+backend/authentication/model/response/JwtResponse.java
+ backend.authentication.model.response.JwtResponse
+backend/authentication/securing/jwt/JwtAuthTokenFilter.java
+ backend.authentication.securing.jwt.JwtAuthTokenFilter
+backend/persistence/database_connectivity/JdbcUtils.java
+ backend.persistence.database_connectivity.JdbcUtils
+backend/api/Api.java
+ backend.api.Api
+backend/authentication/model/User.java
+ backend.authentication.model.User
+backend/authentication/AuthApi.java
+ backend.authentication.AuthApi
+backend/persistence/repositories/RecipeRepo.java
+ backend.persistence.repositories.RecipeRepo
+backend/authentication/securing/WebSecurityConfig.java
+ backend.authentication.securing.WebSecurityConfig
+backend/authentication/model/request/Login.java
+ backend.authentication.model.request.Login
+backend/BackendApplication.java
+ backend.BackendApplication
+backend/authentication/securing/jwt/JwtAuthEntryPoint.java
+ backend.authentication.securing.jwt.JwtAuthEntryPoint
+backend/authentication/model/request/SignUp.java
+ backend.authentication.model.request.SignUp
+backend/authentication/securing/services/UserDetailsServiceImpl.java
+ backend.authentication.securing.services.UserDetailsServiceImpl
+backend/server/Server.java
+ backend.server.Server
+backend/authentication/securing/services/UserPrinciple.java
+ backend.authentication.securing.services.UserPrinciple
+backend/domain/Recipe.java
+ backend.domain.Recipe
+backend/authentication/securing/jwt/JwtProvider.java
+ backend.authentication.securing.jwt.JwtProvider

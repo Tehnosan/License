@@ -28,4 +28,10 @@ export class LoginComponent implements OnInit {
         }
       });
   }
+
+  test(): void {
+    this.authService.test().subscribe( res => {
+      console.log(res);
+    });
+  }
 }
