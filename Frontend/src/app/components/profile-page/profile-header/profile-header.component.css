@@ -1,0 +1,34 @@
+.header {
+  display: flex;
+
+  background-color: red;
+}
+
+.profile-pic {
+  width: 150px;
+  height: 150px;
+}
+
+.div1, .div2 {
+  height: 75px;
+  width: 50%;
+
+  text-align: center;
+
+  background-color: gray;
+}
+
+.test {
+  display: flex;
+
+  width: 100%;
+
+  background-color: green;
+}
+
+.test0 {
+  width: 100%;
+  background-color: blue;
+}
+
+

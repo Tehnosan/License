@@ -26,7 +26,7 @@ export class RecipesComponent implements OnInit {
       },
         (httpErrorResponse: HttpErrorResponse) => {
           console.log(httpErrorResponse);
-          this.router.navigateByUrl('/login');
+          // this.router.navigateByUrl('/login');
         });
   }
 

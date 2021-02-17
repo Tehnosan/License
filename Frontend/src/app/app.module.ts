@@ -10,6 +10,7 @@ import { MaterialModule } from './app.material-module';
 import { LoginComponent } from './components/open-page/login/login.component';
 import { RecipesComponent } from './components/main-page/recipes/recipes.component';
 import { AddRecipeFormComponent } from './components/add-recipe-page/add-recipe-form/add-recipe-form.component';
+import { ProfileHeaderComponent } from './components/profile-page/profile-header/profile-header.component';
 
 
 
@@ -19,7 +20,8 @@ import { AddRecipeFormComponent } from './components/add-recipe-page/add-recipe-
     NavbarComponent,
     LoginComponent,
     RecipesComponent,
-    AddRecipeFormComponent
+    AddRecipeFormComponent,
+    ProfileHeaderComponent
   ],
   imports: [
       HttpClientModule,
