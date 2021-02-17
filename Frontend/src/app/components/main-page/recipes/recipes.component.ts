@@ -2,6 +2,7 @@ import {Component, OnInit } from '@angular/core';
 import {Recipe} from '../../../models/recipe';
 import {RecipeService} from '../../../services/recipe-service/recipe.service';
 import {Router} from '@angular/router';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-recipes',
@@ -19,7 +20,14 @@ export class RecipesComponent implements OnInit {
 
   getRecipes(): void {
     this.recipeService.getRecipes()
-      .subscribe(recipes => this.recipes = recipes);
+      .subscribe(
+        (recipes: Recipe[]) => {
+        this.recipes = recipes;
+      },
+        (httpErrorResponse: HttpErrorResponse) => {
+          console.log(httpErrorResponse);
+          this.router.navigateByUrl('/login');
+        });
   }
 
   onHeartClick(event): void {

@@ -4,7 +4,7 @@ import {
   OnInit,
   ViewChild
 } from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 import {RecipeService} from '../../../services/recipe-service/recipe.service';
 import {Router} from '@angular/router';
 
@@ -22,14 +22,15 @@ export class AddRecipeFormComponent implements OnInit {
 
   ingredientsError = false;
   stepsError = false;
+  generalError = false;
 
   constructor(private formBuilder: FormBuilder, private recipeService: RecipeService, private router: Router){
   }
 
   ngOnInit(): void {
     // create recipe form
-    this.recipeForm = this.formBuilder.group({
-      name: new FormControl('', [Validators.required]), // name of the recipe
+    this.recipeForm = new FormGroup({
+      name: new FormControl( '', [Validators.required]), // name of the recipe
       ingredients: new FormArray([]),  // array with the ingredients
       steps: new FormArray([])  // array with the steps
     });
@@ -72,15 +73,7 @@ export class AddRecipeFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.getIngredients.length === 0) {
-      this.ingredientsError = true;
-    }
-
-    if (this.getSteps.length === 0) {
-      this.stepsError = true;
-    }
-
-    if (this.ingredientsError === false && this.stepsError === false) {
+    if (this.generalError === false) {
       const ingredients = this.getIngredients;
       const steps = this.getSteps;
 
@@ -103,9 +96,42 @@ export class AddRecipeFormComponent implements OnInit {
       quantitiesAsString = quantitiesAsString.slice(0, -1);
       stepsAsString = stepsAsString.slice(0, -1);
 
-      this.recipeService.addRecipe({ name: this.getFormControls.name.value, url: this.imageURL, ingredients: ingredientsNames, quantities: quantitiesAsString, steps: stepsAsString }).subscribe(res => console.log(res));
+      console.log('added');
+      // this.recipeService.addRecipe({ name: this.getFormControls.name.value, url: this.imageURL, ingredients: ingredientsNames, quantities: quantitiesAsString, steps: stepsAsString }).subscribe(res => console.log(res));
 
-      this.router.navigateByUrl('/main');
+      // this.router.navigateByUrl('/main');
+    }
+  }
+
+  public validateForm(): void {
+    this.generalError = false;
+
+    if (this.getIngredients.length === 0) {
+      this.ingredientsError = true;
+    }
+
+    if (this.getSteps.length === 0) {
+      this.stepsError = true;
+    }
+
+    if (this.getFormControls.name.value === '' || this.ingredientsError === true || this.stepsError === true) {
+      this.generalError = true;
+    }
+
+    this.getIngredients.controls.forEach(ingredient => {
+      if (ingredient.value.ingredient === '' || ingredient.value.quantity === '') {
+        this.generalError = true;
+      }
+    });
+
+    this.getSteps.controls.forEach(step => {
+      if (step.value.step === '') {
+        this.generalError = true;
+      }
+    });
+
+    if (this.imageURL === undefined) {
+      this.generalError = true;
     }
   }
 
@@ -117,7 +143,6 @@ export class AddRecipeFormComponent implements OnInit {
       const reader = new FileReader();
       reader.onload = () => {
         this.imageURL = reader.result as string;
-        console.log(this.imageURL);
       };
       reader.readAsDataURL(event.target.files[0]);
 

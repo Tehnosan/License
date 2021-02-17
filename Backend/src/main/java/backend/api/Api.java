@@ -1,6 +1,5 @@
 package backend.api;
 
-import backend.authentication.model.User;
 import backend.domain.Recipe;
 import backend.server.Server;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,31 +8,22 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-//@CrossOrigin(origins="http://localhost:4200")
-@CrossOrigin(origins="*")
+@CrossOrigin(origins="http://localhost:4200")
+//@CrossOrigin(origins="*")
 @RequestMapping("/logged")
 public class Api {
     @Autowired
     private Server server;
 
-    @PostMapping("/login")
-    public User login(@RequestBody User user){
-        return this.server.login(user.getUsername(), user.getPassword());
-    }
-
     @GetMapping("/recipes")
     public List<Recipe> getR() {
+        System.out.println("get recipes");
         return this.server.getRecipes();
-    }
-
-    @GetMapping("/user")
-    public String getUser() {
-        System.out.println("getUser");
-        return "getuser";
     }
 
     @PostMapping("/add-recipe")
     public Recipe addRecipe(@RequestBody Recipe recipe) {
+        System.out.println("add recipe");
         return this.server.addRecipe(recipe);
     }
 //

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Recipe} from '../../models/recipe';
@@ -7,7 +7,7 @@ import {Recipe} from '../../models/recipe';
   providedIn: 'root'
 })
 export class RecipeService {
-  private backendUrl = 'http://localhost:8080';
+  private backendUrl = 'http://localhost:8080/logged';
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
@@ -16,8 +16,17 @@ export class RecipeService {
     private http: HttpClient
   ) { }
 
+  getAuthHeaders(): HttpHeaders {
+    const tokenType = localStorage.getItem('tokenType');
+    const accessToken = localStorage.getItem('accessToken');
+
+    return new HttpHeaders({Authorization: tokenType + ' ' + accessToken});
+  }
+
   getRecipes(): Observable<Recipe[]> {
-    return this.http.get<Recipe[]>(`${this.backendUrl}/recipes`);
+    const headers = this.getAuthHeaders();
+
+    return this.http.get<Recipe[]>(`${this.backendUrl}/recipes`, { headers });
   }
 
   addRecipe(recipe: { name, url, ingredients, quantities, steps }): Observable<any> {

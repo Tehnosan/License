@@ -8,12 +8,12 @@ backend/authentication/securing/jwt/JwtAuthTokenFilter.java
  backend.authentication.securing.jwt.JwtAuthTokenFilter
 backend/persistence/database_connectivity/JdbcUtils.java
  backend.persistence.database_connectivity.JdbcUtils
-backend/api/Api.java
- backend.api.Api
+backend/authentication/securing/jwt/JwtProvider.java
+ backend.authentication.securing.jwt.JwtProvider
 backend/authentication/model/User.java
  backend.authentication.model.User
-backend/authentication/AuthApi.java
- backend.authentication.AuthApi
+backend/domain/Recipe.java
+ backend.domain.Recipe
 backend/persistence/repositories/RecipeRepo.java
  backend.persistence.repositories.RecipeRepo
 backend/authentication/securing/WebSecurityConfig.java
@@ -32,7 +32,7 @@ backend/server/Server.java
  backend.server.Server
 backend/authentication/securing/services/UserPrinciple.java
  backend.authentication.securing.services.UserPrinciple
-backend/domain/Recipe.java
- backend.domain.Recipe
-backend/authentication/securing/jwt/JwtProvider.java
- backend.authentication.securing.jwt.JwtProvider
+backend/authentication/AuthApi.java
+ backend.authentication.AuthApi
+backend/api/Api.java
+ backend.api.Api
