@@ -1,0 +1,14 @@
+.image {
+  width: 400px;
+  height: 270px;
+}
+
+.sideMargin {
+  margin: 25px auto;
+
+  width: 900px;
+}
+
+.red {
+  fill: rgb(103, 58, 183);
+}

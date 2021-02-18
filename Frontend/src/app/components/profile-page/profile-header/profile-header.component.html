@@ -1,26 +1,53 @@
-<div class="header">
-  <div>
-    <img src="/assets/logo.png" alt="profile_pic" class="profile-pic">
-  </div>
-
-  <div class="test0">
-    <div class="test">
-      <div class="div1">
-        aaaa
+<div class="outer">
+  <div class="full-width">
+    <!-- the entire header wrapper -->
+    <div class="header">
+      <!-- profile image -->
+      <div>
+        <img src="/assets/logo.png" alt="profile_pic" class="profile-pic">
       </div>
 
-      <div class="div2">
-        bbbbb
+      <!-- wrapper for right side of the header -->
+      <div class="main-wrapper">
+
+        <!-- wrapper for the top side -->
+        <div class="flex-wrapper">
+
+          <div class="top top-left">
+            <label class="number-label">56</label>
+            <label class="number-label">&nbsp;</label>
+            <label class="text-label">Posts</label>
+          </div>
+
+          <div class="top top-middle">
+            <label class="number-label">0</label>
+            <label class="number-label">&nbsp;</label>
+            <label class="text-label">Liked</label>
+          </div>
+
+          <div class="top top-right">
+            <label class="number-label">0</label>
+            <label class="number-label">&nbsp;</label>
+            <label class="text-label">Cooked</label>
+          </div>
+        </div>
+
+        <!-- wrapper for the bottom side -->
+        <div class="flex-wrapper">
+
+          <div class="bottom bottom-left">
+            <button mat-raised-button class="bottom-button" color="primary">Edit profile</button>
+          </div>
+
+          <div class="bottom bottom-right">
+            <button mat-raised-button class="bottom-button" color="primary">Settings</button>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="test">
-      <div class="div1">
-        aaaa
-      </div>
 
-      <div class="div1">
-        bbbbb
-      </div>
-    </div>
+    <mat-divider></mat-divider>
   </div>
+
+  <app-user-recipes></app-user-recipes>
 </div>

@@ -11,6 +11,11 @@
   box-shadow: 5px 5px 10px rgb(89, 1, 128);
 }
 
+#outer {
+  display: flex;
+  align-items: center;
+}
+
 .middleTextPosition {
   text-align: center;
 }

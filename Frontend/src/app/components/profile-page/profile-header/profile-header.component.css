@@ -1,7 +1,9 @@
 .header {
   display: flex;
 
-  background-color: red;
+  height: 150px;
+
+  margin: 0 300px;
 }
 
 .profile-pic {
@@ -9,26 +11,86 @@
   height: 150px;
 }
 
-.div1, .div2 {
-  height: 75px;
-  width: 50%;
-
-  text-align: center;
-
-  background-color: gray;
+.main-wrapper {
+  width: 100%;
 }
 
-.test {
+.flex-wrapper {
   display: flex;
 
   width: 100%;
-
-  background-color: green;
+  height: 50%;
 }
 
-.test0 {
+.top {
+  height: 100%;
+  width: 33.333%;
+
+  display: flex;
+
+  align-items: center;
+}
+
+.top-left {
+  justify-content: flex-end;
+}
+
+.top-middle {
+  justify-content: center;
+}
+
+.top-right {
+  justify-content: flex-start;
+}
+
+.bottom {
+  height: 100%;
+  width: 50%;
+
+  display: flex;
+
+  align-items: center;
+}
+
+.bottom-left {
+  justify-content: flex-end;
+  margin-right: 25px;
+}
+
+.bottom-right {
+  justify-content: flex-start;
+  margin-left: 25px;
+}
+
+.number-label {
+  font-size: 20px;
+}
+
+.text-label {
+  font-size: 18px;
+}
+
+.bottom-button {
+  height: 25px;
+  width: 200px;
+
+  line-height: 25px;
+}
+
+mat-divider {
+  margin: 0 300px;
+  border-top-color: rgb(103, 58, 183);
+}
+
+.outer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  background-image: linear-gradient(to right top, white, rgb(255, 247, 185));
+}
+
+.full-width {
   width: 100%;
-  background-color: blue;
 }
-
 

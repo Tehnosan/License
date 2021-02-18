@@ -4,7 +4,8 @@
 
 html, body {
   height: 100%;
-  background-color: rgb(255, 247, 185);
+  /*background-color: rgb(255, 247, 185);*/
+  background-image: linear-gradient(to right top, white, rgb(255, 247, 185));
 }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .wrapper {

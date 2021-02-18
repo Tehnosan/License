@@ -30,6 +30,9 @@ export class RecipeService {
   }
 
   addRecipe(recipe: { name, url, ingredients, quantities, steps }): Observable<any> {
-    return this.http.post<any>(`${this.backendUrl}/add-recipe`, recipe, this.httpOptions);
+    const headers = this.getAuthHeaders();
+    headers.set('Content-Type', 'application/json');
+
+    return this.http.post<any>(`${this.backendUrl}/add-recipe`, recipe, { headers });
   }
 }

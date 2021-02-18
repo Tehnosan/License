@@ -108,3 +108,10 @@ mat-icon {
 
   margin-right: 25px;
 }
+
+.outer {
+  display: flex;
+  align-items: center;
+
+  background-image: linear-gradient(to right top, white, rgb(255, 247, 185));
+}

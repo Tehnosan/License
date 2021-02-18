@@ -9,11 +9,12 @@ import {ProfileHeaderComponent} from './components/profile-page/profile-header/p
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  // { path: 'main', canActivate: [AuthGuardService], component: RecipesComponent },
-  { path: 'main', component: RecipesComponent },
-  // { path: 'add', canActivate: [AuthGuardService], component: AddRecipeFormComponent },
-  { path: 'add', component: AddRecipeFormComponent },
-  { path: 'profile', component: ProfileHeaderComponent },
+  { path: 'main', canActivate: [AuthGuardService], component: RecipesComponent },
+  // { path: 'main', component: RecipesComponent },
+  { path: 'add', canActivate: [AuthGuardService], component: AddRecipeFormComponent },
+  // { path: 'add', component: AddRecipeFormComponent },
+  { path: 'profile', canActivate: [AuthGuardService],  component: ProfileHeaderComponent },
+  // { path: 'profile', component: ProfileHeaderComponent },
   { path: '**', redirectTo: '/login', pathMatch: 'full' }
 ];
 

@@ -11,6 +11,7 @@ import { LoginComponent } from './components/open-page/login/login.component';
 import { RecipesComponent } from './components/main-page/recipes/recipes.component';
 import { AddRecipeFormComponent } from './components/add-recipe-page/add-recipe-form/add-recipe-form.component';
 import { ProfileHeaderComponent } from './components/profile-page/profile-header/profile-header.component';
+import { UserRecipesComponent } from './components/profile-page/user-recipes/user-recipes.component';
 
 
 
@@ -21,7 +22,8 @@ import { ProfileHeaderComponent } from './components/profile-page/profile-header
     LoginComponent,
     RecipesComponent,
     AddRecipeFormComponent,
-    ProfileHeaderComponent
+    ProfileHeaderComponent,
+    UserRecipesComponent
   ],
   imports: [
       HttpClientModule,
