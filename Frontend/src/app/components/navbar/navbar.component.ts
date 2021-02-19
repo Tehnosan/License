@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 
 @Component({
@@ -15,6 +15,10 @@ export class NavbarComponent implements OnInit {
 
   goToProfile(): void {
     this.router.navigateByUrl('profile');
+  }
+
+  goHome(): void {
+    this.router.navigateByUrl('home');
   }
 
 }

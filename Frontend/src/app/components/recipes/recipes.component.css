@@ -1,4 +1,4 @@
-.image {
+img {
   width: 400px;
   height: 270px;
 }
@@ -9,6 +9,7 @@
   width: 900px;
 }
 
-.red {
+.purple {
   fill: rgb(103, 58, 183);
 }
+

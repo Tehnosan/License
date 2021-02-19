@@ -1,0 +1,11 @@
+<app-navbar></app-navbar>
+
+<div class="outer">
+  <app-recipes [recipes]="recipes"></app-recipes>
+
+  <div class="add-button">
+    <button mat-mini-fab color="primary" (click)="handleAddButton()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+</div>

@@ -1,21 +1,6 @@
-img {
-  width: 400px;
-  height: 270px;
-}
-
-.sideMargin {
-  margin: 25px auto;
-
-  width: 900px;
-}
-
 .add-button {
   text-align: center;
   margin-bottom: 25px;
-}
-
-.red {
-  fill: rgb(103, 58, 183);
 }
 
 .outer {
@@ -25,4 +10,3 @@ img {
 
   background-image: linear-gradient(to right top, white, rgb(255, 247, 185));
 }
-

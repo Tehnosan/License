@@ -5,13 +5,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './components/main-page/navbar/navbar.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 import { MaterialModule } from './app.material-module';
 import { LoginComponent } from './components/open-page/login/login.component';
-import { RecipesComponent } from './components/main-page/recipes/recipes.component';
+import { RecipesComponent } from './components/recipes/recipes.component';
 import { AddRecipeFormComponent } from './components/add-recipe-page/add-recipe-form/add-recipe-form.component';
 import { ProfileHeaderComponent } from './components/profile-page/profile-header/profile-header.component';
-import { UserRecipesComponent } from './components/profile-page/user-recipes/user-recipes.component';
+import { AddRecipePageComponent } from './components/add-recipe-page/add-recipe-page.component';
+import { HomePageComponent } from './components/home-page/home-page.component';
+import { ProfilePageComponent } from './components/profile-page/profile-page.component';
 
 
 
@@ -23,7 +25,9 @@ import { UserRecipesComponent } from './components/profile-page/user-recipes/use
     RecipesComponent,
     AddRecipeFormComponent,
     ProfileHeaderComponent,
-    UserRecipesComponent
+    AddRecipePageComponent,
+    HomePageComponent,
+    ProfilePageComponent
   ],
   imports: [
       HttpClientModule,

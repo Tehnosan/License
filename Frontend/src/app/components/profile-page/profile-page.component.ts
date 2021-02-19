@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import {Recipe} from '../../../models/recipe';
-import {RecipeService} from '../../../services/recipe-service/recipe.service';
+import {Recipe} from '../../models/recipe';
+import {RecipeService} from '../../services/recipe-service/recipe.service';
 import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
-  selector: 'app-user-recipes',
-  templateUrl: './user-recipes.component.html',
-  styleUrls: ['./user-recipes.component.css']
+  selector: 'app-profile-page',
+  templateUrl: './profile-page.component.html',
+  styleUrls: ['./profile-page.component.css']
 })
-export class UserRecipesComponent implements OnInit {
+export class ProfilePageComponent implements OnInit {
   recipes: Recipe[] = [];
 
   constructor(private recipeService: RecipeService) { }
@@ -27,14 +27,5 @@ export class UserRecipesComponent implements OnInit {
           console.log(httpErrorResponse);
           // this.router.navigateByUrl('/login');
         });
-  }
-
-  onHeartClick(event): void {
-    if (event.target.classList.contains('red')) {
-      event.target.classList.remove('red');
-    }
-    else {
-      event.target.classList.add('red');
-    }
   }
 }

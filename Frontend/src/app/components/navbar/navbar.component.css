@@ -2,11 +2,11 @@
   flex: 2 1 auto;
 }
 
-button {
+.profile-button {
   width: 50px;
   height: 50px;
   /*background-color: rgb(255, 247, 185);*/
-  background-image: url("src/assets/logo.png");
+  background-image: url("../../../assets/logo.png");
   background-size: 55px 55px;
 
   background-position: center;
@@ -22,3 +22,6 @@ button {
   font-size: 20px;
 }
 
+mat-toolbar {
+  background-image: linear-gradient(to right bottom, rgb(103, 58, 183), rgba(103, 58, 183, 0.5));
+}
