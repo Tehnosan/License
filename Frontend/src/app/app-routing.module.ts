@@ -8,12 +8,12 @@ import {ProfilePageComponent} from './components/profile-page/profile-page.compo
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  // { path: 'home', canActivate: [AuthGuardService], component: HomePageComponent },
-  { path: 'home', component: HomePageComponent },
-  // { path: 'add', canActivate: [AuthGuardService], component: AddRecipePageComponent },
-  { path: 'add', component: AddRecipePageComponent },
-  // { path: 'profile', canActivate: [AuthGuardService],  component: ProfilePageComponent },
-  { path: 'profile', component: ProfilePageComponent },
+  { path: 'home', canActivate: [AuthGuardService], component: HomePageComponent },
+  // { path: 'home', component: HomePageComponent },
+  { path: 'add', canActivate: [AuthGuardService], component: AddRecipePageComponent },
+  // { path: 'add', component: AddRecipePageComponent },
+  { path: 'profile', canActivate: [AuthGuardService],  component: ProfilePageComponent },
+  // { path: 'profile', component: ProfilePageComponent },
   { path: '**', redirectTo: '/login', pathMatch: 'full' }
 ];
 

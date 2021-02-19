@@ -47,8 +47,12 @@ public class Server {
         return user;
     }
 
-    public List<Recipe> getRecipes() {
-        return this.recipeRepo.getRecipes();
+    public List<Recipe> getHomeRecipes(String user) {
+        return this.recipeRepo.getHomeRecipes(user);
+    }
+
+    public List<Recipe> getProfileRecipes(String user) {
+        return this.recipeRepo.getProfileRecipes(user);
     }
 
     public Recipe addRecipe(Recipe recipe) {

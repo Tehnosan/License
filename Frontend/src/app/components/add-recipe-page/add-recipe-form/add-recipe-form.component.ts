@@ -97,9 +97,9 @@ export class AddRecipeFormComponent implements OnInit {
       stepsAsString = stepsAsString.slice(0, -1);
 
       console.log('added');
-      this.recipeService.addRecipe({ name: this.getFormControls.name.value, url: this.imageURL, ingredients: ingredientsNames, quantities: quantitiesAsString, steps: stepsAsString }).subscribe(res => console.log(res));
+      this.recipeService.addRecipe(this.getFormControls.name.value, this.imageURL, ingredientsNames, quantitiesAsString, stepsAsString).subscribe(res => console.log(res));
 
-      this.router.navigateByUrl('/main');
+      this.router.navigateByUrl('/home');
     }
   }
 

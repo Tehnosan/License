@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {User} from '../../../models/user';
 import {LoginResponse} from '../../../models/loginResponse';
 import {HttpErrorResponse} from '@angular/common/http';
+import {TokenStorageService} from '../../../services/token-storage-service/token-storage.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
   username: string;
   password: string;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
   }
@@ -27,9 +28,11 @@ export class LoginComponent implements OnInit {
           this.hasLoginError = true;
         }
         else {
-          localStorage.setItem('tokenType', data.tokenType);
-          localStorage.setItem('accessToken', data.accessToken);
-          this.router.navigateByUrl('/main');
+          this.tokenStorageService.saveTokenType(data.tokenType);
+          this.tokenStorageService.saveToken(data.accessToken);
+          this.tokenStorageService.saveUsername(data.username);
+
+          this.router.navigateByUrl('home');
         }
       }, (httpErrorResponse: HttpErrorResponse) => {
         console.log(httpErrorResponse);

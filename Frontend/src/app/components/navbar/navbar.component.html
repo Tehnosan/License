@@ -1,10 +1,24 @@
+<!-- toolbar -->
 <mat-toolbar>
+
+  <!-- filler helping positioning next components at the end of the toolbar -->
   <span class="filler"></span>
-  <button mat-icon-button (click)="goHome()">
-    <mat-icon>home</mat-icon>
+
+  <!-- home button -->
+  <button mat-icon-button (click)="goHome()" class="dimensions icon-size">
+    <mat-icon [inline]="true">home</mat-icon>
   </button>
+
+  <!-- user nickname -->
   <div class="nickname">
-    Tehnosan
+    {{nickname}}
   </div>
-  <button mat-fab (click)="goToProfile()" class="profile-button"></button>
+
+  <!-- profile button -->
+  <button mat-fab (click)="goToProfile()" class="profile-button dimensions"></button>
+
+  <!-- logout button -->
+  <button mat-icon-button (click)="logout()" class="dimensions icon-size">
+    <mat-icon [inline]="true">logout</mat-icon>
+  </button>
 </mat-toolbar>

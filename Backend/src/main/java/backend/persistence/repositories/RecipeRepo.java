@@ -18,11 +18,13 @@ public class RecipeRepo {
         this.jdbc = jdbc;
     }
 
-    public List<Recipe> getRecipes() {
+    public List<Recipe> getHomeRecipes(String username) {
         Connection connection = this.jdbc.getConnection();
         List<Recipe> recipes = new ArrayList<>();
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Recipes")) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Recipes WHERE user != ?")) {
+            preparedStatement.setString(1, username);
+
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     Integer id = resultSet.getInt("id");
@@ -31,8 +33,38 @@ public class RecipeRepo {
                     String ingredients = resultSet.getString("ingredients");
                     String quantities = resultSet.getString("quantities");
                     String steps = resultSet.getString("steps");
+                    String user = resultSet.getString("user");
 
-                    recipes.add(new Recipe(id, name, url, ingredients, quantities, steps));
+                    recipes.add(new Recipe(id, name, url, ingredients, quantities, steps, user));
+                }
+            }
+
+            return recipes;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public List<Recipe> getProfileRecipes(String username) {
+        Connection connection = this.jdbc.getConnection();
+        List<Recipe> recipes = new ArrayList<>();
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Recipes WHERE user == ?")) {
+            preparedStatement.setString(1, username);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Integer id = resultSet.getInt("id");
+                    String name = resultSet.getString("name");
+                    String url = resultSet.getString("url");
+                    String ingredients = resultSet.getString("ingredients");
+                    String quantities = resultSet.getString("quantities");
+                    String steps = resultSet.getString("steps");
+                    String user = resultSet.getString("user");
+
+                    recipes.add(new Recipe(id, name, url, ingredients, quantities, steps, user));
                 }
             }
 
@@ -47,13 +79,14 @@ public class RecipeRepo {
     public Recipe addRecipe(Recipe recipe) {
         Connection connection = this.jdbc.getConnection();
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Recipes VALUES (?, ?, ?, ?, ?, ?)")) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Recipes VALUES (?, ?, ?, ?, ?, ?, ?)")) {
             preparedStatement.setNull(1, Types.NULL);
             preparedStatement.setString(2, recipe.getName());
             preparedStatement.setString(3, recipe.getUrl());
             preparedStatement.setString(4, recipe.getIngredients());
             preparedStatement.setString(5, recipe.getQuantities());
             preparedStatement.setString(6, recipe.getSteps());
+            preparedStatement.setString(7, recipe.getUser());
 
             preparedStatement.executeUpdate();
 

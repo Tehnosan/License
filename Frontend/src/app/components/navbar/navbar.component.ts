@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import {TokenStorageService} from '../../services/token-storage-service/token-storage.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,10 +8,12 @@ import {Router} from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  nickname: string;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
+    this.nickname = this.tokenStorageService.getUsername();
   }
 
   goToProfile(): void {
@@ -21,4 +24,8 @@ export class NavbarComponent implements OnInit {
     this.router.navigateByUrl('home');
   }
 
+  logout(): void {
+    this.tokenStorageService.signOut();
+    window.location.reload();
+  }
 }

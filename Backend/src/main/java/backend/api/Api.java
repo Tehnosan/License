@@ -15,10 +15,16 @@ public class Api {
     @Autowired
     private Server server;
 
-    @GetMapping("/recipes")
-    public List<Recipe> getR() {
-        System.out.println("get recipes");
-        return this.server.getRecipes();
+    @PostMapping("/home-recipes")
+    public List<Recipe> getHomeRecipes(@RequestBody String user) {
+        System.out.println("get home recipes");
+        return this.server.getHomeRecipes(user);
+    }
+
+    @PostMapping("/profile-recipes")
+    public List<Recipe> getProfileRecipes(@RequestBody String user) {
+        System.out.println("get profile recipes");
+        return this.server.getProfileRecipes(user);
     }
 
     @PostMapping("/add-recipe")

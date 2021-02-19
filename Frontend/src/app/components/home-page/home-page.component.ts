@@ -19,7 +19,7 @@ export class HomePageComponent implements OnInit {
   }
 
   getRecipes(): void {
-    this.recipeService.getRecipes()
+    this.recipeService.getHomeRecipes()
       .subscribe(
         (recipes: Recipe[]) => {
           this.recipes = recipes;

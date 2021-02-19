@@ -16,4 +16,5 @@ public class Recipe implements Serializable {
     private String ingredients;
     private String quantities;
     private String steps;
+    private String user;
 }

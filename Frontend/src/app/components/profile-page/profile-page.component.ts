@@ -10,6 +10,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 })
 export class ProfilePageComponent implements OnInit {
   recipes: Recipe[] = [];
+  nrOfPosts: number;
 
   constructor(private recipeService: RecipeService) { }
 
@@ -18,10 +19,11 @@ export class ProfilePageComponent implements OnInit {
   }
 
   getRecipes(): void {
-    this.recipeService.getRecipes()
+    this.recipeService.getProfileRecipes()
       .subscribe(
         (recipes: Recipe[]) => {
           this.recipes = recipes;
+          this.nrOfPosts = recipes.length;
         },
         (httpErrorResponse: HttpErrorResponse) => {
           console.log(httpErrorResponse);

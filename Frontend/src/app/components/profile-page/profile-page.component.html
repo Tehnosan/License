@@ -1,5 +1,7 @@
 <app-navbar></app-navbar>
 
-<app-profile-header></app-profile-header>
+<div class="outer">
+  <app-profile-header [nrOfPosts]="nrOfPosts"></app-profile-header>
 
-<app-recipes [recipes]="recipes"></app-recipes>
+  <app-recipes [recipes]="recipes"></app-recipes>
+</div>
