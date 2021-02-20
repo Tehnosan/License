@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Recipe} from '../../models/recipe';
 import {TokenStorageService} from '../token-storage-service/token-storage.service';
+import {Like} from '../../models/like';
 
 @Injectable({
   providedIn: 'root'
@@ -36,12 +37,37 @@ export class RecipeService {
     return this.http.post<Recipe[]>(`${this.backendUrl}/profile-recipes`, this.tokenStorageService.getUsername(), { headers });
   }
 
-  addRecipe(name: string, url: string, ingredients: string, quantities: string, steps: string): Observable<any> {
+  addRecipe(name: string, url: string, ingredients: string, quantities: string, steps: string): Observable<Recipe> {
     const headers = this.getAuthHeaders();
     headers.set('Content-Type', 'application/json');
 
     const recipe: Recipe = { id: -1, name, url, ingredients, quantities, steps, user: this.tokenStorageService.getUsername() };
 
-    return this.http.post<any>(`${this.backendUrl}/add-recipe`, recipe, { headers });
+    return this.http.post<Recipe>(`${this.backendUrl}/add-recipe`, recipe, { headers });
+  }
+
+  likeRecipe(recipeId: number): Observable<Like> {
+    const headers = this.getAuthHeaders();
+    headers.set('Content-Type', 'application/json');
+
+    const like = { recipeId, user: this.tokenStorageService.getUsername() };
+    console.log('like service');
+    return this.http.post<Like>(`${this.backendUrl}/like`, like, { headers });
+  }
+
+  unlikeRecipe(recipeId: number): Observable<Like> {
+    const headers = this.getAuthHeaders();
+    headers.set('Content-Type', 'application/json');
+
+    const like = { recipeId, user: this.tokenStorageService.getUsername() };
+    console.log('unlike service');
+    return this.http.post<Like>(`${this.backendUrl}/unlike`, like, { headers });
+  }
+
+  recipesLiked(): Observable<number[]> {
+    const headers = this.getAuthHeaders();
+    headers.set('Content-Type', 'application/json');
+
+    return this.http.get<number[]>(`${this.backendUrl}/recipes-liked/${this.tokenStorageService.getUsername()}`, {headers});
   }
 }

@@ -1,5 +1,6 @@
 package backend.api;
 
+import backend.domain.Like;
 import backend.domain.Recipe;
 import backend.server.Server;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +30,26 @@ public class Api {
 
     @PostMapping("/add-recipe")
     public Recipe addRecipe(@RequestBody Recipe recipe) {
-        System.out.println("add recipe");
+        System.out.println("add recipe " + recipe.getName());
         return this.server.addRecipe(recipe);
+    }
+
+    @PostMapping("/like")
+    public Like like(@RequestBody Like like) {
+        System.out.println(like.getUser() + " likes " + like.getRecipeId());
+        return this.server.addLike(like);
+    }
+
+    @PostMapping("/unlike")
+    public Like unlike(@RequestBody Like like) {
+        System.out.println(like.getUser() + " unlikes " + like.getRecipeId());
+        return this.server.deleteLike(like);
+    }
+
+    @GetMapping("/recipes-liked/{user}")
+    public List<Integer> getRecipesLiked(@PathVariable String user) {
+        System.out.println("get liked recipes");
+        return this.server.getLikedRecipes(user);
     }
 //
 //    @GetMapping("/recipes/{id}")

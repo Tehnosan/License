@@ -2,7 +2,9 @@ package backend.server;
 
 import backend.authentication.model.User;
 import backend.authentication.repo.UserRepo;
+import backend.domain.Like;
 import backend.domain.Recipe;
+import backend.persistence.repositories.LikeRepo;
 import backend.persistence.repositories.RecipeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,15 +15,18 @@ import java.util.List;
 @Service
 public class Server {
     @Autowired
-    private UserRepo userRepo;
+    private final UserRepo userRepo;
     @Autowired
-    private RecipeRepo recipeRepo;
+    private final RecipeRepo recipeRepo;
+    @Autowired
+    private final LikeRepo likeRepo;
 
     private List<String> loggedUsers;
 
-    public Server(UserRepo userRepo, RecipeRepo recipeRepo) {
+    public Server(UserRepo userRepo, RecipeRepo recipeRepo, LikeRepo likeRepo) {
         this.userRepo = userRepo;
         this.recipeRepo = recipeRepo;
+        this.likeRepo = likeRepo;
 
         this.loggedUsers = new ArrayList<>();
     }
@@ -57,6 +62,18 @@ public class Server {
 
     public Recipe addRecipe(Recipe recipe) {
         return this.recipeRepo.addRecipe(recipe);
+    }
+
+    public Like addLike(Like like) {
+        return this.likeRepo.addLike(like);
+    }
+
+    public Like deleteLike(Like like) {
+        return this.likeRepo.deleteLike(like);
+    }
+
+    public List<Integer> getLikedRecipes(String user) {
+        return this.likeRepo.getLikedRecipes(user);
     }
 
     public List<String> getLoggedUsers(){
