@@ -1,0 +1,51 @@
+<div id="outer">
+  <div class="center">
+    <div class="rectangle">
+      <form (ngSubmit)="signup()">
+        <div class="middleTextPosition">
+          <label class="title">Sign up</label>
+        </div>
+
+        <mat-error *ngIf="hasSignupError" class="full-width">
+          {{errorText}}
+        </mat-error>
+
+        <mat-form-field appearance="standard" class="full-width">
+          <mat-label>First Name</mat-label>
+          <input matInput type="text" placeholder="First Name" [(ngModel)]="firstName" name="first">
+        </mat-form-field>
+
+        <mat-form-field appearance="standard" class="full-width">
+          <mat-label>Last Name</mat-label>
+          <input matInput type="text" placeholder="Last Name" [(ngModel)]="lastName" name="last">
+        </mat-form-field>
+
+        <mat-form-field appearance="standard" class="full-width">
+          <mat-label>Username</mat-label>
+          <input matInput placeholder="Username" type="text" [(ngModel)]="username" name="user">
+        </mat-form-field>
+
+        <mat-form-field appearance="standard" class="full-width">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" placeholder="Password" [(ngModel)]="password" name="pass">
+        </mat-form-field>
+
+        <div class="middleTextPosition">
+          <button type="submit" mat-raised-button color="primary" class="full-width thin">Sign up</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="push"></div>
+
+    <div class="rectangle">
+      <p class="middleTextPosition text">
+        Already have an account?
+        <a href="/login">
+          <label class="pointer">Sign in</label>
+        </a>
+      </p>
+    </div>
+  </div>
+</div>
+

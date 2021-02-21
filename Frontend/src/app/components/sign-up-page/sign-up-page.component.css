@@ -1,4 +1,11 @@
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+#outer {
+  display: flex;
+  align-items: center;
+}
+
+.center {
+  margin: 100px auto auto;
+}
 
 .rectangle {
   max-width: 300px;
@@ -10,25 +17,8 @@
   box-shadow: 5px 5px 10px rgb(89, 1, 128);
 }
 
-.center {
-  margin: 100px auto auto;
-}
-
-.push {
-  height: 25px;
-}
-
-#outer {
-  display: flex;
-  align-items: center;
-}
-
 .middleTextPosition {
   text-align: center;
-}
-
-.full-width{
-  width: 100%;
 }
 
 .title {
@@ -37,9 +27,17 @@
   font-size: 25px;
 }
 
+.full-width{
+  width: 100%;
+}
+
 .thin {
   height: 25px;
   line-height: 25px;
+}
+
+.push {
+  height: 25px;
 }
 
 .text {

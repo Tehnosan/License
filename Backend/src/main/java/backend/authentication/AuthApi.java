@@ -53,13 +53,13 @@ public class AuthApi {
 
     @PostMapping("/signup")
     public ResponseEntity registerUser(@RequestBody SignUp signUpRequest) {
-        System.out.println(signUpRequest.getUsername() + " " + signUpRequest.getPassword());
+        System.out.println(signUpRequest.getUsername() + " " + signUpRequest.getPassword() + " " + signUpRequest.getFirstName() + " " + signUpRequest.getLastName());
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             return new ResponseEntity<>(new ResponseMessage("Fail -> Username is already taken!"),
                     HttpStatus.BAD_REQUEST);
         }
 
-        User user = new User(signUpRequest.getUsername(),encoder.encode(signUpRequest.getPassword()), signUpRequest.getFirst_name(), signUpRequest.getLast_name());
+        User user = new User(signUpRequest.getUsername(),encoder.encode(signUpRequest.getPassword()), signUpRequest.getFirstName(), signUpRequest.getLastName());
 
         userRepository.save(user);
 

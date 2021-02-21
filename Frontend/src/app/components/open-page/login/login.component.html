@@ -1,27 +1,40 @@
 <div id="outer">
-  <div id="centerFormPosition">
-    <form (ngSubmit)="login()">
-      <div class="middleTextPosition">
-        <label id="title">Login</label>
-      </div>
+  <div class="center">
+    <div class="rectangle">
+      <form (ngSubmit)="login()">
+        <div class="middleTextPosition">
+          <label class="title">Log in</label>
+        </div>
 
-      <mat-error *ngIf="hasLoginError" class="full-width">
-        Authentication error.
-      </mat-error>
+        <mat-error *ngIf="hasLoginError" class="full-width">
+          Authentication error.
+        </mat-error>
 
-      <mat-form-field appearance="standard" class="full-width">
-        <mat-label>Username</mat-label>
-        <input matInput placeholder="Username" type="text" [(ngModel)]="username" name="user">
-      </mat-form-field>
+        <mat-form-field appearance="standard" class="full-width">
+          <mat-label>Username</mat-label>
+          <input matInput placeholder="Username" type="text" [(ngModel)]="username" name="user">
+        </mat-form-field>
 
-      <mat-form-field appearance="standard" class="full-width">
-        <mat-label>Password</mat-label>
-        <input matInput type="password" placeholder="Password" [(ngModel)]="password" name="pass">
-      </mat-form-field>
+        <mat-form-field appearance="standard" class="full-width">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" placeholder="Password" [(ngModel)]="password" name="pass">
+        </mat-form-field>
 
-      <div class="middleTextPosition">
-        <button type="submit" mat-raised-button color="primary">Login</button>
-      </div>
-    </form>
+        <div class="middleTextPosition">
+          <button type="submit" mat-raised-button color="primary" class="full-width thin">Login</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="push"></div>
+
+    <div class="rectangle">
+      <p class="middleTextPosition text">
+        Need an account?
+        <a href="/sign-up">
+          <label class="pointer">Sign up</label>
+        </a>
+      </p>
+    </div>
   </div>
 </div>

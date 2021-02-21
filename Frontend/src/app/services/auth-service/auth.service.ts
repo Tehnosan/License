@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {User} from '../../models/user';
+import {AuthUser, User} from '../../models/user';
 import {LoginResponse} from '../../models/loginResponse';
 
 @Injectable({
@@ -17,5 +17,10 @@ export class AuthService {
   login(user: User): Observable<LoginResponse> {
     const headers = new HttpHeaders({'Content-Type': 'application/json; charset=utf-8'});
     return this.http.post<LoginResponse>(`${this.backendUrl}/signin`, user, { headers });
+  }
+
+  signup(user: AuthUser): Observable<any> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json; charset=utf-8'});
+    return this.http.post(`${this.backendUrl}/signup`, user, { headers });
   }
 }

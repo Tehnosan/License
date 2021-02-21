@@ -14,6 +14,7 @@ import { ProfileHeaderComponent } from './components/profile-page/profile-header
 import { AddRecipePageComponent } from './components/add-recipe-page/add-recipe-page.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { ProfilePageComponent } from './components/profile-page/profile-page.component';
+import { SignUpPageComponent } from './components/sign-up-page/sign-up-page.component';
 
 
 
@@ -27,7 +28,8 @@ import { ProfilePageComponent } from './components/profile-page/profile-page.com
     ProfileHeaderComponent,
     AddRecipePageComponent,
     HomePageComponent,
-    ProfilePageComponent
+    ProfilePageComponent,
+    SignUpPageComponent
   ],
   imports: [
       HttpClientModule,
