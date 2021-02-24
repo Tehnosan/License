@@ -7,7 +7,7 @@ import {
 import {FormArray, FormBuilder, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 import {RecipeService} from '../../../services/recipe-service/recipe.service';
 import {Router} from '@angular/router';
-import {ImageCroppedEvent} from 'ngx-image-cropper';
+import {ImageCroppedEvent, ImageTransform} from 'ngx-image-cropper';
 
 @Component({
   selector: 'app-add-recipe-form',
@@ -22,6 +22,9 @@ export class AddRecipeFormComponent implements OnInit {
   showCropper = false;
   imageChangedEvent: any = '';
   containWithinAspectRatio = false;
+  mouseOn = false;
+  transform: ImageTransform = {};
+  scale = 1;
 
   recipeForm: FormGroup;
 
@@ -165,5 +168,43 @@ export class AddRecipeFormComponent implements OnInit {
   // toggle ratio aspect
   toggleContainWithinAspectRatio(): void {
     this.containWithinAspectRatio = !this.containWithinAspectRatio;
+  }
+
+  // on scroll event on picture
+  onScroll(event: any): void {
+    const delta = Math.max(-1, Math.min(1, (event.wheelDelta || -event.detail)));
+
+    if (delta > 0) {
+      console.log('scroll up');
+      this.zoomIn();
+    }
+    else if (delta < 0) {
+      console.log('scroll down');
+      this.zoomOut();
+    }
+
+    // stop scrolling page
+    // for IE
+    event.returnValue = false;
+    // for Chrome and Firefox
+    if (event.preventDefault) {
+      event.preventDefault();
+    }
+  }
+
+  zoomOut(): void {
+    this.scale -= .1;
+    this.transform = {
+      ...this.transform,
+      scale: this.scale
+    };
+  }
+
+  zoomIn(): void {
+    this.scale += .1;
+    this.transform = {
+      ...this.transform,
+      scale: this.scale
+    };
   }
 }
