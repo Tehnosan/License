@@ -32,10 +32,34 @@
         </div>
       </mat-form-field>
 
-      <!-- image uploaded -->
-      <div>
-        <img [src]="imageURL" alt="">
+      <!-- Image cropper -->
+      <div class="cropper-wrapper">
+        <image-cropper
+          [imageChangedEvent]="imageChangedEvent"
+          [maintainAspectRatio]="true"
+          [containWithinAspectRatio]="containWithinAspectRatio"
+          [aspectRatio]="1"
+          [resizeToWidth]="350"
+          [cropperMinWidth]="150"
+          [onlyScaleDown]="false"
+          [roundCropper]="false"
+
+
+          [alignImage]="'center'"
+          [style.display]="showCropper ? null : 'none'"
+          format="png"
+          (imageCropped)="imageCropped($event)"
+          (imageLoaded)="imageLoaded()"
+        ></image-cropper>
+        <button mat-mini-fab type="button" *ngIf="showCropper" class="mini-button aspect-ratio-button" (click)="toggleContainWithinAspectRatio()">
+          <mat-icon>unfold_more</mat-icon>
+        </button>
       </div>
+
+<!--      &lt;!&ndash; image uploaded &ndash;&gt;-->
+<!--      <div>-->
+<!--        <img [src]="imageURL" alt="">-->
+<!--      </div>-->
 
       <!-- ingredients container -->
       <div>

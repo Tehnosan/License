@@ -7,6 +7,7 @@ import {
 import {FormArray, FormBuilder, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 import {RecipeService} from '../../../services/recipe-service/recipe.service';
 import {Router} from '@angular/router';
+import {ImageCroppedEvent} from 'ngx-image-cropper';
 
 @Component({
   selector: 'app-add-recipe-form',
@@ -16,7 +17,11 @@ import {Router} from '@angular/router';
 export class AddRecipeFormComponent implements OnInit {
   @ViewChild('fileInput') fileInput: ElementRef;
   fileAttr = 'Choose File';
-  imageURL: string;
+
+  imageURL = '';
+  showCropper = false;
+  imageChangedEvent: any = '';
+  containWithinAspectRatio = false;
 
   recipeForm: FormGroup;
 
@@ -97,9 +102,11 @@ export class AddRecipeFormComponent implements OnInit {
       stepsAsString = stepsAsString.slice(0, -1);
 
       console.log('added');
-      this.recipeService.addRecipe(this.getFormControls.name.value, this.imageURL, ingredientsNames, quantitiesAsString, stepsAsString).subscribe(res => console.log(res));
-
-      this.router.navigateByUrl('/home');
+      // this.recipeService.addRecipe(this.getFormControls.name.value, this.imageURL, ingredientsNames, quantitiesAsString,
+      //   stepsAsString).subscribe(res => console.log(res));
+      //
+      // this.router.navigateByUrl('/home');
+      console.log(this.imageURL);
     }
   }
 
@@ -135,21 +142,28 @@ export class AddRecipeFormComponent implements OnInit {
     }
   }
 
+  // set image change event and set name of the loaded image
   uploadFileEvt(event): void {
+    this.imageChangedEvent = event;
+
     if (event.target.files && event.target.files[0]) {
       this.fileAttr = event.target.files[0].name;
-
-      // HTML5 FileReader API
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.imageURL = reader.result as string;
-      };
-      reader.readAsDataURL(event.target.files[0]);
-
-      // Reset if duplicate image uploaded again
-      this.fileInput.nativeElement.value = '';
-    } else {
-      this.fileAttr = 'Choose File';
     }
+  }
+
+  // when image is loaded show cropper
+  imageLoaded(): void {
+    this.showCropper = true;
+    console.log('Image loaded');
+  }
+
+  // set image url when image is cropped
+  imageCropped(event: ImageCroppedEvent): void {
+    this.imageURL = event.base64;
+  }
+
+  // toggle ratio aspect
+  toggleContainWithinAspectRatio(): void {
+    this.containWithinAspectRatio = !this.containWithinAspectRatio;
   }
 }

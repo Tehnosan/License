@@ -6,6 +6,7 @@ import {AddRecipePageComponent} from './components/add-recipe-page/add-recipe-pa
 import {HomePageComponent} from './components/home-page/home-page.component';
 import {ProfilePageComponent} from './components/profile-page/profile-page.component';
 import {SignUpPageComponent} from './components/sign-up-page/sign-up-page.component';
+import {CropperComponent} from './components/cropper/cropper.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'add', component: AddRecipePageComponent },
   // { path: 'profile', canActivate: [AuthGuardService],  component: ProfilePageComponent },
   { path: 'profile', component: ProfilePageComponent },
+  { path: 'cropper', component: CropperComponent },
   { path: '**', redirectTo: '/login', pathMatch: 'full' }
 ];
 

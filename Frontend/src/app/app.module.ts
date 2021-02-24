@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -15,6 +16,7 @@ import { AddRecipePageComponent } from './components/add-recipe-page/add-recipe-
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { ProfilePageComponent } from './components/profile-page/profile-page.component';
 import { SignUpPageComponent } from './components/sign-up-page/sign-up-page.component';
+import { CropperComponent } from './components/cropper/cropper.component';
 
 
 
@@ -29,7 +31,8 @@ import { SignUpPageComponent } from './components/sign-up-page/sign-up-page.comp
     AddRecipePageComponent,
     HomePageComponent,
     ProfilePageComponent,
-    SignUpPageComponent
+    SignUpPageComponent,
+    CropperComponent
   ],
   imports: [
       HttpClientModule,
@@ -37,6 +40,7 @@ import { SignUpPageComponent } from './components/sign-up-page/sign-up-page.comp
       BrowserModule,
       BrowserAnimationsModule,
       AppRoutingModule,
+      ImageCropperModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

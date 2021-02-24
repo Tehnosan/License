@@ -1,0 +1,14 @@
+<mat-form-field class="full-width">
+  <div>
+    <mat-toolbar class="no-padding-left">
+      <!-- Display files names -->
+      <input matInput readonly [placeholder]="fileAttr"/>
+
+      <!-- Browse Button -->
+      <button mat-flat-button color="primary">Browse File</button>
+    </mat-toolbar>
+
+    <!-- Fetch selected filed on change -->
+    <input type="file" #fileInput id="uploadFile" (change)="uploadFileEvt($event)" accept="image/*"/>
+  </div>
+</mat-form-field>

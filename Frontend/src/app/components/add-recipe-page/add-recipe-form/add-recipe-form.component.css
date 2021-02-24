@@ -30,11 +30,10 @@
 }
 
 img {
-  width: 350px;
-  height: auto;
-
   margin-left: 25px;
   margin-right: 25px;
+
+  border: 1px solid black;
 }
 
 mat-icon {
@@ -114,4 +113,27 @@ mat-icon {
   align-items: center;
 
   background-image: linear-gradient(to right top, white, rgb(255, 247, 185));
+}
+
+image-cropper {
+  width: 100%;
+  height: auto;
+
+  padding: 0;
+}
+
+.cropper-wrapper {
+  display: inline-block;
+  position: relative;
+}
+
+.aspect-ratio-button {
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+
+  transform: rotate(45deg);
+
+  background-color: transparent;
+  box-shadow: none;
 }

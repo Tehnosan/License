@@ -1,0 +1,25 @@
+.no-padding-left {
+  padding-left: 0;
+}
+
+#uploadFile {
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9;
+  opacity: 0;
+  height: 100%;
+  cursor: pointer;
+  position: absolute;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.test {
+  max-width: 500px;
+  padding: 10px;
+
+  background-color: white;
+}
