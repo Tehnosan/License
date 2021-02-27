@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 const TOKEN_TYPE_KEY = 'tokenType';
 const TOKEN_KEY = 'accessToken';
 const USERNAME_KEY = 'username';
+const PROFILE_IMAGE_KEY = 'profileImage';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,15 @@ export class TokenStorageService {
 
   public getTokenType(): string {
     return sessionStorage.getItem(TOKEN_TYPE_KEY);
+  }
+
+  public saveProfileImage(profileImage: string): void {
+    window.sessionStorage.removeItem(PROFILE_IMAGE_KEY);
+    window.sessionStorage.setItem(PROFILE_IMAGE_KEY, profileImage);
+  }
+
+  public getProfileImage(): string {
+    return sessionStorage.getItem(PROFILE_IMAGE_KEY);
   }
 
   signOut(): void {

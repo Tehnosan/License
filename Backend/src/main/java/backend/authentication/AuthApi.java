@@ -48,7 +48,7 @@ public class AuthApi {
 
         System.out.println(loginRequest.getUsername() + " signed in");
 
-        return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
+        return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities(), this.userRepository.getProfileImage(loginRequest.getUsername())));
     }
 
     @PostMapping("/signup")
@@ -59,7 +59,7 @@ public class AuthApi {
                     HttpStatus.BAD_REQUEST);
         }
 
-        User user = new User(signUpRequest.getUsername(),encoder.encode(signUpRequest.getPassword()), signUpRequest.getFirstName(), signUpRequest.getLastName());
+        User user = new User(signUpRequest.getUsername(),encoder.encode(signUpRequest.getPassword()), signUpRequest.getFirstName(), signUpRequest.getLastName(), signUpRequest.getImageUrl());
 
         userRepository.save(user);
 

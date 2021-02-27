@@ -1,0 +1,45 @@
+form {
+  max-width: 500px;
+  min-width: 500px;
+
+  padding: 10px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.no-padding-left {
+  padding-left: 0;
+}
+
+#uploadFile {
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9;
+  opacity: 0;
+  height: 100%;
+  cursor: pointer;
+  position: absolute;
+}
+
+mat-toolbar {
+  padding-left: 0;
+  height: 20px;
+  background-color: transparent;
+
+}
+
+mat-toolbar button {
+  width: 150px;
+  height: 30px;
+
+  line-height: 30px;
+
+  margin-bottom: 5px;
+}
+
+.middle {
+  text-align: center;
+}

@@ -9,11 +9,13 @@ public class JwtResponse {
     private String type = "Bearer";
     private String username;
     private Collection authorities;
+    private String imageUrl;
 
-    public JwtResponse(String accessToken, String username, Collection authorities) {
+    public JwtResponse(String accessToken, String username, Collection authorities, String imageUrl) {
         this.token = accessToken;
         this.username = username;
         this.authorities = authorities;
+        this.imageUrl = imageUrl;
     }
 
     public String getAccessToken() {
@@ -38,6 +40,14 @@ public class JwtResponse {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public Collection<? extends GrantedAuthority> getAuthorities() {

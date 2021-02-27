@@ -126,46 +126,50 @@ user</ColNames>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="31" parent="8" name="Users_username_uindex">
+    <column id="31" parent="8" name="image">
+      <Position>5</Position>
+      <DataType>varchar(500000)|0s</DataType>
+    </column>
+    <index id="32" parent="8" name="Users_username_uindex">
       <ColNames>username</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <index id="32" parent="8" name="sqlite_autoindex_Users_1">
+    <index id="33" parent="8" name="sqlite_autoindex_Users_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>username</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="33" parent="8" name="Users_pk">
+    <key id="34" parent="8" name="Users_pk">
       <ColNames>username</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>sqlite_autoindex_Users_1</UnderlyingIndexName>
     </key>
-    <column id="34" parent="9" name="type">
+    <column id="35" parent="9" name="type">
       <Position>1</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="35" parent="9" name="name">
+    <column id="36" parent="9" name="name">
       <Position>2</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="36" parent="9" name="tbl_name">
+    <column id="37" parent="9" name="tbl_name">
       <Position>3</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="37" parent="9" name="rootpage">
+    <column id="38" parent="9" name="rootpage">
       <Position>4</Position>
       <DataType>int|0s</DataType>
     </column>
-    <column id="38" parent="9" name="sql">
+    <column id="39" parent="9" name="sql">
       <Position>5</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="39" parent="10" name="name">
+    <column id="40" parent="10" name="name">
       <Position>1</Position>
     </column>
-    <column id="40" parent="10" name="seq">
+    <column id="41" parent="10" name="seq">
       <Position>2</Position>
     </column>
   </database-model>

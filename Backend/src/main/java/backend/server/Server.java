@@ -76,6 +76,10 @@ public class Server {
         return this.likeRepo.getLikedRecipes(user);
     }
 
+    public void updateProfileImage(String username, String imageUrl) {
+        this.userRepo.updateProfileImage(username, imageUrl);
+    }
+
     public List<String> getLoggedUsers(){
         return this.loggedUsers;
     }

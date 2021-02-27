@@ -3,7 +3,7 @@
   <div class="header">
     <!-- profile image -->
     <div>
-      <img src="/assets/logo.png" alt="profile_pic" class="profile-pic">
+      <img src="{{profileImage}}" alt="profile_pic" class="profile-pic">
     </div>
 
     <!-- wrapper for right side of the header -->
@@ -35,7 +35,7 @@
       <div class="flex-wrapper">
 
         <div class="bottom bottom-left">
-          <button mat-raised-button class="bottom-button" color="primary">Edit profile</button>
+          <button mat-raised-button class="bottom-button" color="primary" (click)="onEditProfile()">Edit profile</button>
         </div>
 
         <div class="bottom bottom-right">

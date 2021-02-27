@@ -1,25 +1,32 @@
-.no-padding-left {
-  padding-left: 0;
+.cropper-wrapper {
+  display: inline-block;
+  position: relative;
 }
 
-#uploadFile {
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 9;
-  opacity: 0;
-  height: 100%;
-  cursor: pointer;
+.mini-button {
+  width: 35px;
+  height: 35px;
+
   position: absolute;
+  bottom: 5px;
+  left: 0;
+
+  transform: rotate(45deg);
+
+  background-color: transparent;
+  box-shadow: none;
 }
 
-.full-width {
+image-cropper {
   width: 100%;
+  height: auto;
+
+  padding: 0;
 }
 
-.test {
-  max-width: 500px;
-  padding: 10px;
+mat-icon {
+  display: flex;
+  justify-content: center;
 
-  background-color: white;
+  font-size: 20px;
 }

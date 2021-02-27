@@ -45,11 +45,11 @@ export class RecipesComponent implements OnInit, OnChanges {
   getRecipesLiked(): void {
     this.recipeService.recipesLiked().subscribe( (data: number[]) => {
       this.likedRecipes = data;
-      console.log(this.recipes);
-      console.log(this.likedRecipes);
-      console.log('asd');
+      // console.log(this.recipes);
+      // console.log(this.likedRecipes);
+      // console.log('asd');
       this.setLikes();
-      console.log(this.likes);
+      // console.log(this.likes);
     });
   }
 

@@ -15,7 +15,7 @@
   </div>
 
   <!-- profile button -->
-  <button mat-fab (click)="goToProfile()" class="profile-button dimensions"></button>
+  <button mat-fab (click)="goToProfile()" class="profile-button dimensions" [ngStyle]="{ 'background-image': 'url('+profileImage+')' }"></button>
 
   <!-- logout button -->
   <button mat-icon-button (click)="logout()" class="dimensions icon-size">

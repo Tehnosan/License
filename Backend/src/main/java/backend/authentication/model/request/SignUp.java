@@ -6,6 +6,7 @@ public class SignUp {
 
     private String firstName;
     private String lastName;
+    private String imageUrl;
 
     private String password;
 
@@ -15,6 +16,14 @@ public class SignUp {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getFirstName() {

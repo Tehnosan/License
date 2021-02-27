@@ -1,5 +1,6 @@
 package backend.api;
 
+import backend.authentication.model.User;
 import backend.domain.Like;
 import backend.domain.Recipe;
 import backend.server.Server;
@@ -50,6 +51,12 @@ public class Api {
     public List<Integer> getRecipesLiked(@PathVariable String user) {
         System.out.println("get liked recipes");
         return this.server.getLikedRecipes(user);
+    }
+
+    @PutMapping("/update-profile-image")
+    public void updateProfileImage(@RequestBody User user) {
+        System.out.println("update profile image for " + user.getUsername());
+        this.server.updateProfileImage(user.getUsername(), user.getImageUrl());
     }
 //
 //    @GetMapping("/recipes/{id}")

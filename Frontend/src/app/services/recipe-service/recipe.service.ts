@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {Recipe} from '../../models/recipe';
 import {TokenStorageService} from '../token-storage-service/token-storage.service';
 import {Like} from '../../models/like';
+import {AuthUser} from '../../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -69,5 +70,14 @@ export class RecipeService {
     headers.set('Content-Type', 'application/json');
 
     return this.http.get<number[]>(`${this.backendUrl}/recipes-liked/${this.tokenStorageService.getUsername()}`, {headers});
+  }
+
+  updateProfileImage(imageUrl: string): Observable<string> {
+    const headers = this.getAuthHeaders();
+    headers.set('Content-Type', 'application/json');
+
+    const user = new AuthUser(this.tokenStorageService.getUsername(), '', '', '', imageUrl);
+
+    return this.http.put<string>(`${this.backendUrl}/update-profile-image`, user, { headers });
   }
 }

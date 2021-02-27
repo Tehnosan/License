@@ -16,21 +16,25 @@ export class LoginComponent implements OnInit {
   username: string;
   password: string;
 
-  constructor(private authService: AuthService, private router: Router, private tokenStorageService: TokenStorageService) { }
+  constructor(private authService: AuthService, private router: Router,
+              private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
   }
 
   login(): void {
+    // log in
     this.authService.login(new User(this.username, this.password))
       .subscribe((data: LoginResponse) => {
         if (data === null) {
           this.hasLoginError = true;
         }
         else {
+          console.log(data);
           this.tokenStorageService.saveTokenType(data.tokenType);
           this.tokenStorageService.saveToken(data.accessToken);
           this.tokenStorageService.saveUsername(data.username);
+          this.tokenStorageService.saveProfileImage(data.imageUrl);
 
           this.router.navigateByUrl('home');
         }

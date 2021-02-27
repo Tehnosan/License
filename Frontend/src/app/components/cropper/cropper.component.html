@@ -1,14 +1,24 @@
-<mat-form-field class="full-width">
-  <div>
-    <mat-toolbar class="no-padding-left">
-      <!-- Display files names -->
-      <input matInput readonly [placeholder]="fileAttr"/>
+<!-- Image cropper -->
+<div class="cropper-wrapper">
+  <image-cropper
+    [imageChangedEvent]="imageChangedEvent"
+    [maintainAspectRatio]="true"
+    [containWithinAspectRatio]="containWithinAspectRatio"
+    [aspectRatio]="1"
+    [resizeToWidth]="350"
+    [cropperMinWidth]="150"
+    [onlyScaleDown]="false"
+    [roundCropper]="roundCropper"
 
-      <!-- Browse Button -->
-      <button mat-flat-button color="primary">Browse File</button>
-    </mat-toolbar>
-
-    <!-- Fetch selected filed on change -->
-    <input type="file" #fileInput id="uploadFile" (change)="uploadFileEvt($event)" accept="image/*"/>
-  </div>
-</mat-form-field>
+    [transform]="transform"
+    [alignImage]="'center'"
+    [style.display]="showCropper ? null : 'none'"
+    format="png"
+    (imageCropped)="imageCropped($event)"
+    (imageLoaded)="imageLoaded()"
+    (mousewheel)="onScroll($event)"
+  ></image-cropper>
+  <button mat-mini-fab type="button" *ngIf="showCropper" class="mini-button" (click)="toggleContainWithinAspectRatio()">
+    <mat-icon>unfold_more</mat-icon>
+  </button>
+</div>

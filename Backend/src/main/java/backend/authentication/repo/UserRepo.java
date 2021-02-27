@@ -19,11 +19,12 @@ public class UserRepo {
     public void save(User user) {
         Connection connection = this.jdbc.getConnection();
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Users VALUES (?, ?, ?, ?)")) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Users VALUES (?, ?, ?, ?, ?)")) {
             preparedStatement.setString(1, user.getUsername());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getFirst_name());
             preparedStatement.setString(4, user.getLast_name());
+            preparedStatement.setString(5, user.getImageUrl());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -40,7 +41,7 @@ public class UserRepo {
 
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                return new User(username, password, resultSet.getString("first_name"), resultSet.getString("last_name"));
+                return new User(username, password, resultSet.getString("first_name"), resultSet.getString("last_name"), resultSet.getString("image"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -57,7 +58,7 @@ public class UserRepo {
 
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                return new User(username, resultSet.getString("password"), resultSet.getString("first_name"), resultSet.getString("last_name"));
+                return new User(username, resultSet.getString("password"), resultSet.getString("first_name"), resultSet.getString("last_name"), resultSet.getString("image"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -84,5 +85,35 @@ public class UserRepo {
         }
 
         return false;
+    }
+
+    public String getProfileImage(String username) {
+        Connection connection = this.jdbc.getConnection();
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Users WHERE username = ?")) {
+            preparedStatement.setString(1, username);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getString("image");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public void updateProfileImage(String username, String imageUrl) {
+        Connection connection = this.jdbc.getConnection();
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Users SET image = ? WHERE username = ?")) {
+            preparedStatement.setString(1, imageUrl);
+            preparedStatement.setString(2, username);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

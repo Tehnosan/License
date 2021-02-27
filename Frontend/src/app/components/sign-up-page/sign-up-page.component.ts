@@ -24,7 +24,7 @@ export class SignUpPageComponent implements OnInit {
   }
 
   signup(): void {
-    this.authService.signup(new AuthUser(this.username, this.password, this.firstName, this.lastName))
+    this.authService.signup(new AuthUser(this.username, this.password, this.firstName, this.lastName, ''))
       .subscribe(data => {
         if (data === null) {
           this.hasSignupError = true;

@@ -1,0 +1,24 @@
+<mat-dialog-content>
+  <form (ngSubmit)="onSubmit()">
+    <mat-form-field class="full-width">
+      <mat-toolbar>
+        <!-- Display files names -->
+        <input type="text" matInput readonly [placeholder]="fileAttr"/>
+
+        <!-- Browse Button -->
+        <button mat-flat-button color="primary">Browse File</button>
+      </mat-toolbar>
+
+      <!-- Fetch selected filed on change -->
+      <input type="file" id="uploadFile" (change)="uploadFileEvt($event)" accept="image/*"/>
+    </mat-form-field>
+
+    <app-cropper [imageChangedEvent]="imageChangedEvent" (imageUrlChanged)="imageUrlChangedHandler($event)" [roundCropper]="true">
+    </app-cropper>
+
+    <!-- submit button -->
+    <div class="middle">
+      <button type="submit" mat-raised-button color="primary" mat-dialog-close>Submit</button>
+    </div>
+  </form>
+</mat-dialog-content>
