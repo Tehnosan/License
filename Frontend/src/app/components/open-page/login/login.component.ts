@@ -5,6 +5,7 @@ import {User} from '../../../models/user';
 import {LoginResponse} from '../../../models/loginResponse';
 import {HttpErrorResponse} from '@angular/common/http';
 import {TokenStorageService} from '../../../services/token-storage-service/token-storage.service';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -13,14 +14,20 @@ import {TokenStorageService} from '../../../services/token-storage-service/token
 })
 export class LoginComponent implements OnInit {
   hasLoginError = false;
-  username: string;
-  password: string;
+
+  loginForm: FormGroup;
 
   constructor(private authService: AuthService, private router: Router,
-              private tokenStorageService: TokenStorageService) { }
+              private tokenStorageService: TokenStorageService) {}
 
   ngOnInit(): void {
+    this.loginForm = new FormGroup({
+      username: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required),
+    });
   }
+  get username(): string { return this.loginForm.get('username').value; }
+  get password(): string { return this.loginForm.get('password').value; }
 
   login(): void {
     // log in

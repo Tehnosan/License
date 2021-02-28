@@ -3,6 +3,7 @@ import {AuthService} from '../../services/auth-service/auth.service';
 import {Router} from '@angular/router';
 import {AuthUser} from '../../models/user';
 import {HttpErrorResponse} from '@angular/common/http';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-sign-up-page',
@@ -10,25 +11,32 @@ import {HttpErrorResponse} from '@angular/common/http';
   styleUrls: ['./sign-up-page.component.css']
 })
 export class SignUpPageComponent implements OnInit {
-  hasSignupError = false;
-  errorText: string;
+  hasSignUpError = false;
 
-  firstName: string;
-  lastName: string;
-  username: string;
-  password: string;
+  signUpForm: FormGroup;
 
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+    this.signUpForm = new FormGroup({
+      firstName: new FormControl('', Validators.required),
+      lastName: new FormControl('', Validators.required),
+      username: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required)
+    });
   }
+
+  get firstName(): string { return this.signUpForm.get('firstName').value; }
+  get lastName(): string { return this.signUpForm.get('lastName').value; }
+  get username(): string { return this.signUpForm.get('username').value; }
+  get password(): string { return this.signUpForm.get('password').value; }
 
   signup(): void {
     this.authService.signup(new AuthUser(this.username, this.password, this.firstName, this.lastName, ''))
       .subscribe(data => {
         if (data === null) {
-          this.hasSignupError = true;
-          this.errorText = 'Authentication error';
+          console.log('nul');
+          this.hasSignUpError = true;
         }
         else {
           console.log(data);
@@ -37,8 +45,7 @@ export class SignUpPageComponent implements OnInit {
         }
       }, (httpErrorResponse: HttpErrorResponse) => {
         console.log(httpErrorResponse);
-        this.hasSignupError = true;
-        this.errorText = httpErrorResponse.error.message;
+        this.hasSignUpError = true;
       });
   }
 }

@@ -1,37 +1,37 @@
 <div id="outer">
   <div class="center">
     <div class="rectangle">
-      <form (ngSubmit)="signup()">
+      <form [formGroup]="signUpForm" (ngSubmit)="signup()">
         <div class="middleTextPosition">
           <label class="title">Sign up</label>
         </div>
 
-        <mat-error *ngIf="hasSignupError" class="full-width">
-          {{errorText}}
+        <mat-error *ngIf="hasSignUpError" class="full-width">
+          Sign Up error. Please try again
         </mat-error>
 
         <mat-form-field appearance="standard" class="full-width">
           <mat-label>First Name</mat-label>
-          <input matInput type="text" placeholder="First Name" [(ngModel)]="firstName" name="first">
+          <input matInput type="text" placeholder="First Name" formControlName="firstName" required name="firstName">
         </mat-form-field>
 
         <mat-form-field appearance="standard" class="full-width">
           <mat-label>Last Name</mat-label>
-          <input matInput type="text" placeholder="Last Name" [(ngModel)]="lastName" name="last">
+          <input matInput type="text" placeholder="Last Name" formControlName="lastName" required name="lastName">
         </mat-form-field>
 
         <mat-form-field appearance="standard" class="full-width">
           <mat-label>Username</mat-label>
-          <input matInput placeholder="Username" type="text" [(ngModel)]="username" name="user">
+          <input matInput placeholder="Username" type="text" formControlName="username" required name="username">
         </mat-form-field>
 
         <mat-form-field appearance="standard" class="full-width">
           <mat-label>Password</mat-label>
-          <input matInput type="password" placeholder="Password" [(ngModel)]="password" name="pass">
+          <input matInput type="password" placeholder="Password" formControlName="password" required name="password">
         </mat-form-field>
 
         <div class="middleTextPosition">
-          <button type="submit" mat-raised-button color="primary" class="full-width thin">Sign up</button>
+          <button type="submit" mat-raised-button color="primary" class="full-width thin" [disabled]="signUpForm.invalid">Sign up</button>
         </div>
       </form>
     </div>

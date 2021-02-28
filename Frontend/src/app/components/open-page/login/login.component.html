@@ -1,7 +1,7 @@
 <div id="outer">
   <div class="center">
     <div class="rectangle">
-      <form (ngSubmit)="login()">
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
         <div class="middleTextPosition">
           <label class="title">Log in</label>
         </div>
@@ -12,16 +12,16 @@
 
         <mat-form-field appearance="standard" class="full-width">
           <mat-label>Username</mat-label>
-          <input matInput placeholder="Username" type="text" [(ngModel)]="username" name="user">
+          <input matInput placeholder="Username" type="text" required formControlName="username">
         </mat-form-field>
 
         <mat-form-field appearance="standard" class="full-width">
           <mat-label>Password</mat-label>
-          <input matInput type="password" placeholder="Password" [(ngModel)]="password" name="pass">
+          <input matInput type="password" placeholder="Password" required formControlName="password">
         </mat-form-field>
 
         <div class="middleTextPosition">
-          <button type="submit" mat-raised-button color="primary" class="full-width thin">Login</button>
+          <button type="submit" mat-raised-button color="primary" class="full-width thin" [disabled]="(loginForm.invalid && (loginForm.touched || loginForm.dirty))">Login</button>
         </div>
       </form>
     </div>

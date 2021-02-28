@@ -4,7 +4,7 @@ import {
   OnInit,
   ViewChild
 } from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
+import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, NgForm, ValidatorFn, Validators} from '@angular/forms';
 import {RecipeService} from '../../../services/recipe-service/recipe.service';
 import {Router} from '@angular/router';
 
@@ -33,8 +33,9 @@ export class AddRecipeFormComponent implements OnInit {
     // create recipe form
     this.recipeForm = new FormGroup({
       name: new FormControl( '', [Validators.required]), // name of the recipe
-      ingredients: new FormArray([]),  // array with the ingredients
-      steps: new FormArray([])  // array with the steps
+      image: new FormControl('', [this.imageValidator(this)]),
+      ingredients: new FormArray([], [Validators.required]),  // array with the ingredients
+      steps: new FormArray([], [Validators.required])  // array with the steps
     });
   }
 
@@ -151,5 +152,15 @@ export class AddRecipeFormComponent implements OnInit {
   // select image url
   imageUrlChangedHandler(url: string): void {
     this.imageURL = url;
+    this.recipeForm.get('image').setValue('');
+  }
+
+  imageValidator(thiss: AddRecipeFormComponent): ValidatorFn {
+    return (control: AbstractControl): {[key: string]: any} | null => {
+      if (thiss.imageURL === '' || thiss.fileAttr === '') {
+        return { imageV: true };
+      }
+      return null;
+    };
   }
 }
