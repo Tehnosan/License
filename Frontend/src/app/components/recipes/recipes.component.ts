@@ -2,6 +2,7 @@ import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core'
 import {Recipe} from '../../models/recipe';
 import {RecipeService} from '../../services/recipe-service/recipe.service';
 import {Like} from '../../models/like';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-recipes',
@@ -12,6 +13,8 @@ export class RecipesComponent implements OnInit, OnChanges {
   @Input() recipes: Recipe[];
   likes: boolean[] = [];
   likedRecipes: number[] = [];
+
+  showEntireRecipe: boolean[] = Array(5).fill(false);
 
   constructor(private recipeService: RecipeService) { }
 
@@ -45,11 +48,12 @@ export class RecipesComponent implements OnInit, OnChanges {
   getRecipesLiked(): void {
     this.recipeService.recipesLiked().subscribe( (data: number[]) => {
       this.likedRecipes = data;
-      // console.log(this.recipes);
-      // console.log(this.likedRecipes);
-      // console.log('asd');
+      console.log(this.likedRecipes);
       this.setLikes();
-      // console.log(this.likes);
+      console.log(this.likes);
+    }, (httpErrorResponse: HttpErrorResponse) => {
+      console.log(httpErrorResponse);
+      this.likes = Array(5).fill(false);
     });
   }
 
@@ -64,5 +68,19 @@ export class RecipesComponent implements OnInit, OnChanges {
         this.likes.push(false);
       }
     }
+  }
+
+  showFullRecipe(i: number): void {
+    console.log('full recipe');
+    this.showEntireRecipe[i] = !this.showEntireRecipe[i];
+  }
+
+  stringToArray(propertyList: string): string[] {
+    return propertyList.split('-');
+  }
+
+  ingredientsAndQuantities(ingredients: string, quantities: string): string[][] {
+    const quantitiesAsArray = this.stringToArray(quantities);
+    return this.stringToArray(ingredients).map((x, i) => [x, quantitiesAsArray[i]]);
   }
 }

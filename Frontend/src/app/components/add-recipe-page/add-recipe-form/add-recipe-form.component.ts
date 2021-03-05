@@ -100,11 +100,13 @@ export class AddRecipeFormComponent implements OnInit {
       stepsAsString = stepsAsString.slice(0, -1);
 
       console.log('added');
-      // this.recipeService.addRecipe(this.getFormControls.name.value, this.imageURL, ingredientsNames, quantitiesAsString,
-      //   stepsAsString).subscribe(res => console.log(res));
-      //
-      // this.router.navigateByUrl('/home');
-      console.log(this.imageURL);
+      this.recipeService.addRecipe(this.getFormControls.name.value, this.imageURL, ingredientsNames, quantitiesAsString,
+        stepsAsString).subscribe(res => console.log(res));
+
+      this.router.navigateByUrl('/home');
+      // console.log(ingredientsNames);
+      // console.log(quantitiesAsString);
+      // console.log(stepsAsString);
     }
   }
 

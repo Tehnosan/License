@@ -1,9 +1,13 @@
 img {
   width: 400px;
-  height: 270px;
+  height: 400px;
 }
 
-.sideMargin {
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+
   margin: 25px auto;
 
   width: 900px;
@@ -11,4 +15,38 @@ img {
 
 .purple {
   fill: rgb(103, 58, 183);
+}
+
+mat-card {
+  max-width: 368px;
+  margin: auto;
+}
+
+mat-card-content {
+  width: 368px;
+}
+
+.inline {
+  display: flex;
+  line-height: 10px;
+}
+
+.inline p:nth-child(2) {
+  width: 100%;
+  text-align: right;
+}
+
+.bottom-margin {
+  margin-bottom: 15px;
+}
+
+.expand {
+  position: relative;
+
+  top: -25px;
+  right: -345px;
+}
+
+.no-height {
+  height: 0;
 }
