@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Recipe} from '../../models/recipe';
 import {TokenStorageService} from '../token-storage-service/token-storage.service';
@@ -25,51 +25,57 @@ export class RecipeService {
   }
 
   getHomeRecipes(): Observable<Recipe[]> {
-    const headers = this.getAuthHeaders();
-    headers.set('Content-Type', 'application/json');
+    let headers = this.getAuthHeaders();
+    headers = headers.set('Content-Type', 'application/json');
 
-    return this.http.post<Recipe[]>(`${this.backendUrl}/home-recipes`, this.tokenStorageService.getUsername(), { headers });
+    const options = { params: new HttpParams().set('user', this.tokenStorageService.getUsername()), headers };
+
+    return this.http.get<Recipe[]>(`${this.backendUrl}/home-recipes`,  options);
   }
 
   getProfileRecipes(): Observable<Recipe[]> {
-    const headers = this.getAuthHeaders();
-    headers.set('Content-Type', 'application/json');
+    let headers = this.getAuthHeaders();
+    headers = headers.set('Content-Type', 'application/json');
 
-    return this.http.post<Recipe[]>(`${this.backendUrl}/profile-recipes`, this.tokenStorageService.getUsername(), { headers });
+    const options = { params: new HttpParams().set('user', this.tokenStorageService.getUsername()), headers };
+
+    return this.http.post<Recipe[]>(`${this.backendUrl}/profile-recipes`, options);
   }
 
   addRecipe(name: string, url: string, ingredients: string, quantities: string, steps: string): Observable<Recipe> {
-    const headers = this.getAuthHeaders();
-    headers.set('Content-Type', 'application/json');
+    let headers = this.getAuthHeaders();
+    headers = headers.set('Content-Type', 'application/json');
 
     const recipe: Recipe = { id: -1, name, url, ingredients, quantities, steps, user: this.tokenStorageService.getUsername() };
 
-    return this.http.post<Recipe>(`${this.backendUrl}/add-recipe`, recipe, { headers });
+    return this.http.post<Recipe>(`${this.backendUrl}/recipe`, recipe, { headers });
   }
 
   likeRecipe(recipeId: number): Observable<Like> {
-    const headers = this.getAuthHeaders();
-    headers.set('Content-Type', 'application/json');
+    let headers = this.getAuthHeaders();
+    headers = headers.set('Content-Type', 'application/json');
 
     const like = { recipeId, user: this.tokenStorageService.getUsername() };
-    console.log('like service');
+
     return this.http.post<Like>(`${this.backendUrl}/like`, like, { headers });
   }
 
   unlikeRecipe(recipeId: number): Observable<Like> {
-    const headers = this.getAuthHeaders();
-    headers.set('Content-Type', 'application/json');
+    let headers = this.getAuthHeaders();
+    headers = headers.set('Content-Type', 'application/json');
 
-    const like = { recipeId, user: this.tokenStorageService.getUsername() };
-    console.log('unlike service');
-    return this.http.post<Like>(`${this.backendUrl}/unlike`, like, { headers });
+    const options = { params: new HttpParams().set('recipeId', recipeId.toString()).set('user', this.tokenStorageService.getUsername()), headers };
+
+    return this.http.delete<Like>(`${this.backendUrl}/like`, options);
   }
 
   recipesLiked(): Observable<number[]> {
-    const headers = this.getAuthHeaders();
-    headers.set('Content-Type', 'application/json');
+    let headers = this.getAuthHeaders();
+    headers = headers.set('Content-Type', 'application/json');
 
-    return this.http.get<number[]>(`${this.backendUrl}/recipes-liked/${this.tokenStorageService.getUsername()}`, {headers});
+    const options = { params: new HttpParams().set('user', this.tokenStorageService.getUsername()), headers };
+
+    return this.http.get<number[]>(`${this.backendUrl}/liked-recipes`, options);
   }
 
   updateProfileImage(imageUrl: string): Observable<string> {
@@ -78,6 +84,6 @@ export class RecipeService {
 
     const user = new AuthUser(this.tokenStorageService.getUsername(), '', '', '', imageUrl);
 
-    return this.http.put<string>(`${this.backendUrl}/update-profile-image`, user, { headers });
+    return this.http.put<string>(`${this.backendUrl}/profile-image`, user, { headers });
   }
 }

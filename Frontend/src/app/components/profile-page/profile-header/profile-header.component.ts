@@ -12,17 +12,22 @@ import {Router} from '@angular/router';
 export class ProfileHeaderComponent implements OnInit {
   @Input() nrOfPosts: number;
   profileImage = '';
+  nrOfLikedPosts: number;
+  nrOfCookedRecipes: number;
 
   constructor(private tokenStorageService: TokenStorageService, private dialog: MatDialog, private router: Router) { }
 
   ngOnInit(): void {
     this.setProfileImage();
+    this.setNumberOfLikedRecipes();
+    this.setNumberOfCookedRecipes();
   }
 
   setProfileImage(): void {
     this.profileImage = this.tokenStorageService.getProfileImage();
   }
 
+  // open profile image and reload page on close
   onEditProfile(): void {
     const dialogRef = this.dialog.open(UploadImageComponent);
     dialogRef.afterClosed().subscribe(() => {
@@ -30,5 +35,13 @@ export class ProfileHeaderComponent implements OnInit {
         this.router.navigate(['/profile']);
       });
     });
+  }
+
+  setNumberOfLikedRecipes(): void {
+    this.nrOfLikedPosts = 5;
+  }
+
+  setNumberOfCookedRecipes(): void {
+    this.nrOfCookedRecipes = 2;
   }
 }

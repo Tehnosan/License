@@ -14,8 +14,8 @@ const routes: Routes = [
   { path: 'home', component: HomePageComponent },
   // { path: 'add', canActivate: [AuthGuardService], component: AddRecipePageComponent },
   { path: 'add', component: AddRecipePageComponent },
-  { path: 'profile', canActivate: [AuthGuardService],  component: ProfilePageComponent },
-  // { path: 'profile', component: ProfilePageComponent },
+  // { path: 'profile', canActivate: [AuthGuardService],  component: ProfilePageComponent },
+  { path: 'profile', component: ProfilePageComponent },
   { path: '**', redirectTo: '/login', pathMatch: 'full' }
 ];
 

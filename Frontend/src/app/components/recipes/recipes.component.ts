@@ -18,14 +18,17 @@ export class RecipesComponent implements OnInit, OnChanges {
 
   constructor(private recipeService: RecipeService) { }
 
+  // populate likes array with false
   ngOnInit(): void {
     this.getRecipesLiked();
+    this.likes = Array(5).fill(false);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
 
   }
 
+  // like or unlike recipe with recipeId
   onHeartClick(index: number, recipeId: number): void {
     // this.likes[index] = this.likes[index] !== true;
 
@@ -45,18 +48,17 @@ export class RecipesComponent implements OnInit, OnChanges {
     }
   }
 
+  // get ids for liked recipes and set likes array
   getRecipesLiked(): void {
     this.recipeService.recipesLiked().subscribe( (data: number[]) => {
       this.likedRecipes = data;
-      console.log(this.likedRecipes);
       this.setLikes();
-      console.log(this.likes);
     }, (httpErrorResponse: HttpErrorResponse) => {
       console.log(httpErrorResponse);
-      this.likes = Array(5).fill(false);
     });
   }
 
+  // populate the boolean array likes with true if recipe it's liked or false otherwise
   setLikes(): void {
     this.likes = [];
 
@@ -75,10 +77,12 @@ export class RecipesComponent implements OnInit, OnChanges {
     this.showEntireRecipe[i] = !this.showEntireRecipe[i];
   }
 
+  // return propertyList string splitted by '-'
   stringToArray(propertyList: string): string[] {
     return propertyList.split('-');
   }
 
+  // return a matrix with the elements of two interspersed lists
   ingredientsAndQuantities(ingredients: string, quantities: string): string[][] {
     const quantitiesAsArray = this.stringToArray(quantities);
     return this.stringToArray(ingredients).map((x, i) => [x, quantitiesAsArray[i]]);

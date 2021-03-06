@@ -17,19 +17,19 @@ public class Api {
     @Autowired
     private Server server;
 
-    @PostMapping("/home-recipes")
-    public List<Recipe> getHomeRecipes(@RequestBody String user) {
-        System.out.println("get home recipes");
+    @GetMapping("/home-recipes")
+    public List<Recipe> getHomeRecipes(@RequestParam String user) {
+        System.out.println("get home recipes for " + user);
         return this.server.getHomeRecipes(user);
     }
 
-    @PostMapping("/profile-recipes")
-    public List<Recipe> getProfileRecipes(@RequestBody String user) {
-        System.out.println("get profile recipes");
+    @GetMapping("/profile-recipes")
+    public List<Recipe> getProfileRecipes(@RequestParam String user) {
+        System.out.println("get profile recipes for " + user);
         return this.server.getProfileRecipes(user);
     }
 
-    @PostMapping("/add-recipe")
+    @PostMapping("/recipe")
     public Recipe addRecipe(@RequestBody Recipe recipe) {
         System.out.println("add recipe " + recipe.getName());
         return this.server.addRecipe(recipe);
@@ -41,19 +41,19 @@ public class Api {
         return this.server.addLike(like);
     }
 
-    @PostMapping("/unlike")
-    public Like unlike(@RequestBody Like like) {
-        System.out.println(like.getUser() + " unlikes " + like.getRecipeId());
-        return this.server.deleteLike(like);
+    @DeleteMapping("/like")
+    public Like unlike(@RequestParam String recipeId, @RequestParam String user) {
+        System.out.println(user + " unlikes " + recipeId);
+        return this.server.deleteLike(new Like(Integer.parseInt(recipeId), user));
     }
 
-    @GetMapping("/recipes-liked/{user}")
-    public List<Integer> getRecipesLiked(@PathVariable String user) {
-        System.out.println("get liked recipes");
+    @GetMapping("/liked-recipes")
+    public List<Integer> getRecipesLiked(@RequestParam String user) {
+        System.out.println("get ids of the recipes liked by " + user);
         return this.server.getLikedRecipes(user);
     }
 
-    @PutMapping("/update-profile-image")
+    @PutMapping("/profile-image")
     public void updateProfileImage(@RequestBody User user) {
         System.out.println("update profile image for " + user.getUsername());
         this.server.updateProfileImage(user.getUsername(), user.getImageUrl());
