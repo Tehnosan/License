@@ -80,6 +80,10 @@ public class Server {
         this.userRepo.updateProfileImage(username, imageUrl);
     }
 
+    public Integer getRecipesLikedBy(String user) {
+        return this.recipeRepo.getRecipesLikedBy(user);
+    }
+
     public List<String> getLoggedUsers(){
         return this.loggedUsers;
     }

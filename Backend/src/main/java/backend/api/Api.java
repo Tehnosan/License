@@ -58,6 +58,12 @@ public class Api {
         System.out.println("update profile image for " + user.getUsername());
         this.server.updateProfileImage(user.getUsername(), user.getImageUrl());
     }
+
+    @GetMapping("/liked-recipes-number")
+    public Integer getNumberOfRecipesLikedBy(@RequestParam String user) {
+        System.out.println("get number of recipes liked by " + user);
+        return this.server.getRecipesLikedBy(user);
+    }
 //
 //    @GetMapping("/recipes/{id}")
 //    public Re getRe() {

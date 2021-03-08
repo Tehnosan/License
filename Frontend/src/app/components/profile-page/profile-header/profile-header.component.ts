@@ -3,6 +3,9 @@ import {TokenStorageService} from '../../../services/token-storage-service/token
 import {MatDialog} from '@angular/material/dialog';
 import {UploadImageComponent} from '../upload-image/upload-image.component';
 import {Router} from '@angular/router';
+import {RecipeService} from '../../../services/recipe-service/recipe.service';
+import {Recipe} from '../../../models/recipe';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-profile-header',
@@ -15,7 +18,7 @@ export class ProfileHeaderComponent implements OnInit {
   nrOfLikedPosts: number;
   nrOfCookedRecipes: number;
 
-  constructor(private tokenStorageService: TokenStorageService, private dialog: MatDialog, private router: Router) { }
+  constructor(private tokenStorageService: TokenStorageService, private dialog: MatDialog, private router: Router, private recipeService: RecipeService) { }
 
   ngOnInit(): void {
     this.setProfileImage();
@@ -38,7 +41,13 @@ export class ProfileHeaderComponent implements OnInit {
   }
 
   setNumberOfLikedRecipes(): void {
-    this.nrOfLikedPosts = 5;
+    this.recipeService.getRecipesLikedBy().subscribe(
+      (data: number) => {
+        this.nrOfLikedPosts = data;
+      },
+      (httpErrorResponse: HttpErrorResponse) => {
+        console.log(httpErrorResponse);
+      });
   }
 
   setNumberOfCookedRecipes(): void {

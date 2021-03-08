@@ -22,6 +22,11 @@ export class RecipesComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.getRecipesLiked();
     this.likes = Array(5).fill(false);
+
+    // for offline use
+    // this.likedRecipes.push(2);
+    // this.likedRecipes.push(5);
+    // this.setLikes();
   }
 
   ngOnChanges(changes: SimpleChanges): void {

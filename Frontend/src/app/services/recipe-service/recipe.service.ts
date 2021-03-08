@@ -39,7 +39,7 @@ export class RecipeService {
 
     const options = { params: new HttpParams().set('user', this.tokenStorageService.getUsername()), headers };
 
-    return this.http.post<Recipe[]>(`${this.backendUrl}/profile-recipes`, options);
+    return this.http.get<Recipe[]>(`${this.backendUrl}/profile-recipes`, options);
   }
 
   addRecipe(name: string, url: string, ingredients: string, quantities: string, steps: string): Observable<Recipe> {
@@ -79,11 +79,20 @@ export class RecipeService {
   }
 
   updateProfileImage(imageUrl: string): Observable<string> {
-    const headers = this.getAuthHeaders();
-    headers.set('Content-Type', 'application/json');
+    let headers = this.getAuthHeaders();
+    headers = headers.set('Content-Type', 'application/json');
 
     const user = new AuthUser(this.tokenStorageService.getUsername(), '', '', '', imageUrl);
 
     return this.http.put<string>(`${this.backendUrl}/profile-image`, user, { headers });
+  }
+
+  getRecipesLikedBy(): Observable<number> {
+    let headers = this.getAuthHeaders();
+    headers = headers.set('Content-Type', 'application/json');
+
+    const options = { params: new HttpParams().set('user', this.tokenStorageService.getUsername()), headers };
+
+    return this.http.get<number>(`${this.backendUrl}/liked-recipes-number`, options);
   }
 }

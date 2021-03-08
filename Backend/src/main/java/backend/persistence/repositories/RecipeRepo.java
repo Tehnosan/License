@@ -51,7 +51,7 @@ public class RecipeRepo {
         Connection connection = this.jdbc.getConnection();
         List<Recipe> recipes = new ArrayList<>();
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Recipes WHERE user == ?")) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Recipes WHERE user = ?")) {
             preparedStatement.setString(1, username);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -98,6 +98,24 @@ public class RecipeRepo {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public Integer getRecipesLikedBy(String user) {
+        Connection connection = this.jdbc.getConnection();
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT COUNT(*) FROM Likes WHERE user = ?")) {
+            preparedStatement.setString(1, user);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    return resultSet.getInt(1);
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
 
         return null;

@@ -15,17 +15,19 @@ export class HomePageComponent implements OnInit {
   constructor(private recipeService: RecipeService, private router: Router) { }
 
   ngOnInit(): void {
-    // this.getRecipes();
-    this.recipes.push({ id: 1, user: 'Sandrino', name: 'Recipe1', url: 'assets/car.jpg',
-      steps: 'step1-step2-step3', quantities: 'q1-q2', ingredients: 'ingredient1-ingredient2' });
-    this.recipes.push({ id: 2, user: 'Sandrino', name: 'Recipe2', url: 'assets/car.jpg',
-      steps: 'step', quantities: 'quantity', ingredients: 'ingredient' });
-    this.recipes.push({ id: 3, user: 'admin', name: 'Recipe3', url: 'assets/car.jpg',
-      steps: 'Se incalzeste cuptorul la 180g-Se baga in cuptor', quantities: '3 buc-250 ml-350 g', ingredients: 'oua-lapte-faina' });
-    this.recipes.push({ id: 4, user: 'Sandrino', name: 'Recipe4', url: 'assets/car.jpg',
-      steps: 'step1-step2', quantities: 'q1-q2-q3', ingredients: 'ingredient1-ingredient2-ingredient3' });
-    this.recipes.push({ id: 5, user: 'Sandrino', name: 'Recipe5', url: 'assets/car.jpg',
-      steps: 'step', quantities: 'quantity', ingredients: 'ingredient' });
+    this.getRecipes();
+
+    // for offline use
+    // this.recipes.push({ id: 1, user: 'Sandrino', name: 'Recipe1', url: 'assets/car.jpg',
+    //   steps: 'step1-step2-step3', quantities: 'q1-q2', ingredients: 'ingredient1-ingredient2' });
+    // this.recipes.push({ id: 2, user: 'Sandrino', name: 'Recipe2', url: 'assets/car.jpg',
+    //   steps: 'step', quantities: 'quantity', ingredients: 'ingredient' });
+    // this.recipes.push({ id: 3, user: 'admin', name: 'Recipe3', url: 'assets/car.jpg',
+    //   steps: 'Se incalzeste cuptorul la 180g-Se baga in cuptor', quantities: '3 buc-250 ml-350 g', ingredients: 'oua-lapte-faina' });
+    // this.recipes.push({ id: 4, user: 'Sandrino', name: 'Recipe4', url: 'assets/car.jpg',
+    //   steps: 'step1-step2', quantities: 'q1-q2-q3', ingredients: 'ingredient1-ingredient2-ingredient3' });
+    // this.recipes.push({ id: 5, user: 'Sandrino', name: 'Recipe5', url: 'assets/car.jpg',
+    //   steps: 'step', quantities: 'quantity', ingredients: 'ingredient' });
   }
 
   getRecipes(): void {
