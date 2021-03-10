@@ -11,14 +11,14 @@ import {RecipesPageComponent} from './components/recipes-page/recipes-page.compo
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'sign-up', component: SignUpPageComponent },
-  { path: 'home', canActivate: [AuthGuardService], component: HomePageComponent },
-  // { path: 'home', component: HomePageComponent },
-  { path: 'add', canActivate: [AuthGuardService], component: AddRecipePageComponent },
-  // { path: 'add', component: AddRecipePageComponent },
-  { path: 'profile', canActivate: [AuthGuardService],  component: ProfilePageComponent },
-  // { path: 'profile', component: ProfilePageComponent },
-  { path: 'recipes', canActivate: [AuthGuardService],  component: RecipesPageComponent },
-  // { path: 'recipes', component: RecipesPageComponent },
+  // { path: 'home', canActivate: [AuthGuardService], component: HomePageComponent },
+  { path: 'home', component: HomePageComponent },
+  // { path: 'add', canActivate: [AuthGuardService], component: AddRecipePageComponent },
+  { path: 'add', component: AddRecipePageComponent },
+  // { path: 'profile', canActivate: [AuthGuardService],  component: ProfilePageComponent },
+  { path: 'profile', component: ProfilePageComponent },
+  // { path: 'recipes', canActivate: [AuthGuardService],  component: RecipesPageComponent },
+  { path: 'recipes', component: RecipesPageComponent },
   { path: '**', redirectTo: 'login', pathMatch: 'full' }
 ];
 

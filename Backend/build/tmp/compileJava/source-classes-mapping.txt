@@ -38,7 +38,11 @@ backend/domain/Recipe.java
  backend.domain.Recipe
 backend/persistence/repositories/RecipeRepo.java
  backend.persistence.repositories.RecipeRepo
-backend/server/Server.java
- backend.server.Server
+backend/persistence/repositories/CookRepo.java
+ backend.persistence.repositories.CookRepo
 backend/api/Api.java
  backend.api.Api
+backend/server/Server.java
+ backend.server.Server
+backend/domain/Cook.java
+ backend.domain.Cook

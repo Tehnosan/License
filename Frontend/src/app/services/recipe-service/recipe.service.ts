@@ -5,6 +5,7 @@ import {Recipe} from '../../models/recipe';
 import {TokenStorageService} from '../token-storage-service/token-storage.service';
 import {Like} from '../../models/like';
 import {AuthUser} from '../../models/user';
+import {Cook} from '../../models/cook';
 
 @Injectable({
   providedIn: 'root'
@@ -113,5 +114,25 @@ export class RecipeService {
     const options = { params: new HttpParams().set('user', this.tokenStorageService.getUsername()), headers };
 
     return this.http.get<Recipe[]>(`${this.backendUrl}/liked-recipes`,  options);
+  }
+
+  // save user cooked recipe with ID=recipeId
+  cookRecipe(recipeId: number): Observable<Cook> {
+    let headers = this.getAuthHeaders();
+    headers = headers.set('Content-Type', 'application/json');
+
+    const cook = { recipeId, user: this.tokenStorageService.getUsername() };
+
+    return this.http.post<Cook>(`${this.backendUrl}/cook`, cook, { headers });
+  }
+
+  // delete user cooked recipe with ID=recipeId
+  uncookedRecipe(recipeId: number): Observable<Cook> {
+    let headers = this.getAuthHeaders();
+    headers = headers.set('Content-Type', 'application/json');
+
+    const options = { params: new HttpParams().set('recipeId', recipeId.toString()).set('user', this.tokenStorageService.getUsername()), headers };
+
+    return this.http.delete<Cook>(`${this.backendUrl}/cook`, options);
   }
 }

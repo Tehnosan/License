@@ -1,6 +1,7 @@
 package backend.api;
 
 import backend.authentication.model.User;
+import backend.domain.Cook;
 import backend.domain.Like;
 import backend.domain.Recipe;
 import backend.server.Server;
@@ -69,5 +70,17 @@ public class Api {
     public List<Recipe> getRecipesLikedBy(@RequestParam String user) {
         System.out.println("get recipes liked by " + user);
         return this.server.getRecipesLikedBY(user);
+    }
+
+    @PostMapping("/cook")
+    public Cook cook(@RequestBody Cook cook) {
+        System.out.println(cook.getUser() + " cooked " + cook.getRecipeId());
+        return this.server.addCook(cook);
+    }
+
+    @DeleteMapping("/cook")
+    public Cook uncook(@RequestParam String recipeId, @RequestParam String user) {
+        System.out.println(user + " uncooked " + recipeId);
+        return this.server.deleteCook(new Cook(Integer.parseInt(recipeId), user));
     }
 }
