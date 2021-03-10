@@ -17,6 +17,7 @@ export class RecipeService {
     private tokenStorageService: TokenStorageService
   ) { }
 
+  // returns authorization header
   getAuthHeaders(): HttpHeaders {
     const tokenType = this.tokenStorageService.getTokenType();
     const accessToken = this.tokenStorageService.getToken();
@@ -24,6 +25,7 @@ export class RecipeService {
     return new HttpHeaders({Authorization: tokenType + ' ' + accessToken});
   }
 
+  // get recipes not posted by user
   getHomeRecipes(): Observable<Recipe[]> {
     let headers = this.getAuthHeaders();
     headers = headers.set('Content-Type', 'application/json');
@@ -33,6 +35,7 @@ export class RecipeService {
     return this.http.get<Recipe[]>(`${this.backendUrl}/home-recipes`,  options);
   }
 
+  // get recipes posted by user
   getProfileRecipes(): Observable<Recipe[]> {
     let headers = this.getAuthHeaders();
     headers = headers.set('Content-Type', 'application/json');
@@ -42,6 +45,7 @@ export class RecipeService {
     return this.http.get<Recipe[]>(`${this.backendUrl}/profile-recipes`, options);
   }
 
+  // save recipe
   addRecipe(name: string, url: string, ingredients: string, quantities: string, steps: string): Observable<Recipe> {
     let headers = this.getAuthHeaders();
     headers = headers.set('Content-Type', 'application/json');
@@ -51,6 +55,7 @@ export class RecipeService {
     return this.http.post<Recipe>(`${this.backendUrl}/recipe`, recipe, { headers });
   }
 
+  // save user liked recipe with ID=recipeId
   likeRecipe(recipeId: number): Observable<Like> {
     let headers = this.getAuthHeaders();
     headers = headers.set('Content-Type', 'application/json');
@@ -60,6 +65,7 @@ export class RecipeService {
     return this.http.post<Like>(`${this.backendUrl}/like`, like, { headers });
   }
 
+  // delete user liked recipe with ID=recipeId
   unlikeRecipe(recipeId: number): Observable<Like> {
     let headers = this.getAuthHeaders();
     headers = headers.set('Content-Type', 'application/json');
@@ -69,15 +75,17 @@ export class RecipeService {
     return this.http.delete<Like>(`${this.backendUrl}/like`, options);
   }
 
-  recipesLiked(): Observable<number[]> {
+  // get ids for recipes liked by user
+  getIdsOfRecipesLikedBy(): Observable<number[]> {
     let headers = this.getAuthHeaders();
     headers = headers.set('Content-Type', 'application/json');
 
     const options = { params: new HttpParams().set('user', this.tokenStorageService.getUsername()), headers };
 
-    return this.http.get<number[]>(`${this.backendUrl}/liked-recipes`, options);
+    return this.http.get<number[]>(`${this.backendUrl}/liked-recipes-ids`, options);
   }
 
+  // update user profile image
   updateProfileImage(imageUrl: string): Observable<string> {
     let headers = this.getAuthHeaders();
     headers = headers.set('Content-Type', 'application/json');
@@ -87,12 +95,23 @@ export class RecipeService {
     return this.http.put<string>(`${this.backendUrl}/profile-image`, user, { headers });
   }
 
-  getRecipesLikedBy(): Observable<number> {
+  // get how many recipes user liked
+  getnumberOfRecipesLikedBy(): Observable<number> {
     let headers = this.getAuthHeaders();
     headers = headers.set('Content-Type', 'application/json');
 
     const options = { params: new HttpParams().set('user', this.tokenStorageService.getUsername()), headers };
 
     return this.http.get<number>(`${this.backendUrl}/liked-recipes-number`, options);
+  }
+
+  // get a list with recipes liked by user
+  getRecipesLikedBy(): Observable<Recipe[]> {
+    let headers = this.getAuthHeaders();
+    headers = headers.set('Content-Type', 'application/json');
+
+    const options = { params: new HttpParams().set('user', this.tokenStorageService.getUsername()), headers };
+
+    return this.http.get<Recipe[]>(`${this.backendUrl}/liked-recipes`,  options);
   }
 }

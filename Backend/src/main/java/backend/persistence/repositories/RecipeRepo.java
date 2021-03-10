@@ -103,7 +103,7 @@ public class RecipeRepo {
         return null;
     }
 
-    public Integer getRecipesLikedBy(String user) {
+    public Integer getNumberOfRecipesLikedBy(String user) {
         Connection connection = this.jdbc.getConnection();
 
         try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT COUNT(*) FROM Likes WHERE user = ?")) {
@@ -114,6 +114,41 @@ public class RecipeRepo {
                     return resultSet.getInt(1);
                 }
             }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public List<Recipe> getRecipesLikedBy(String username) {
+        Connection connection = this.jdbc.getConnection();
+        List<Recipe> recipes = new ArrayList<>();
+
+        String statement = "select *\n" +
+                "from Recipes R\n" +
+                "inner join Likes L\n" +
+                "on R.id = L.recipeID\n" +
+                "where l.user = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(statement)) {
+            preparedStatement.setString(1, username);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Integer id = resultSet.getInt("id");
+                    String name = resultSet.getString("name");
+                    String url = resultSet.getString("url");
+                    String ingredients = resultSet.getString("ingredients");
+                    String quantities = resultSet.getString("quantities");
+                    String steps = resultSet.getString("steps");
+                    String user = resultSet.getString("user");
+
+                    recipes.add(new Recipe(id, name, url, ingredients, quantities, steps, user));
+                }
+            }
+
+            return recipes;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

@@ -36,9 +36,9 @@ backend/authentication/securing/services/UserDetailsServiceImpl.java
  backend.authentication.securing.services.UserDetailsServiceImpl
 backend/domain/Recipe.java
  backend.domain.Recipe
-backend/api/Api.java
- backend.api.Api
-backend/server/Server.java
- backend.server.Server
 backend/persistence/repositories/RecipeRepo.java
  backend.persistence.repositories.RecipeRepo
+backend/server/Server.java
+ backend.server.Server
+backend/api/Api.java
+ backend.api.Api

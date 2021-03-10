@@ -4,7 +4,6 @@ import {MatDialog} from '@angular/material/dialog';
 import {UploadImageComponent} from '../upload-image/upload-image.component';
 import {Router} from '@angular/router';
 import {RecipeService} from '../../../services/recipe-service/recipe.service';
-import {Recipe} from '../../../models/recipe';
 import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
@@ -41,7 +40,7 @@ export class ProfileHeaderComponent implements OnInit {
   }
 
   setNumberOfLikedRecipes(): void {
-    this.recipeService.getRecipesLikedBy().subscribe(
+    this.recipeService.getnumberOfRecipesLikedBy().subscribe(
       (data: number) => {
         this.nrOfLikedPosts = data;
       },
@@ -52,5 +51,9 @@ export class ProfileHeaderComponent implements OnInit {
 
   setNumberOfCookedRecipes(): void {
     this.nrOfCookedRecipes = 2;
+  }
+
+  onLikedRecipes(): void {
+    this.router.navigate(['/recipes', { type: 'liked' }]);
   }
 }

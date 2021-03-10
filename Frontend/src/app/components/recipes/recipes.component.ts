@@ -24,7 +24,7 @@ export class RecipesComponent implements OnInit, OnChanges {
     this.likes = Array(5).fill(false);
 
     // for offline use
-    // this.likedRecipes.push(2);
+    // this.likedRecipes.push(1);
     // this.likedRecipes.push(5);
     // this.setLikes();
   }
@@ -55,7 +55,8 @@ export class RecipesComponent implements OnInit, OnChanges {
 
   // get ids for liked recipes and set likes array
   getRecipesLiked(): void {
-    this.recipeService.recipesLiked().subscribe( (data: number[]) => {
+    this.recipeService.getIdsOfRecipesLikedBy().subscribe(
+      (data: number[]) => {
       this.likedRecipes = data;
       this.setLikes();
     }, (httpErrorResponse: HttpErrorResponse) => {

@@ -47,8 +47,8 @@ public class Api {
         return this.server.deleteLike(new Like(Integer.parseInt(recipeId), user));
     }
 
-    @GetMapping("/liked-recipes")
-    public List<Integer> getRecipesLiked(@RequestParam String user) {
+    @GetMapping("/liked-recipes-ids")
+    public List<Integer> getIdsOfRecipesLikedBy(@RequestParam String user) {
         System.out.println("get ids of the recipes liked by " + user);
         return this.server.getLikedRecipes(user);
     }
@@ -62,42 +62,12 @@ public class Api {
     @GetMapping("/liked-recipes-number")
     public Integer getNumberOfRecipesLikedBy(@RequestParam String user) {
         System.out.println("get number of recipes liked by " + user);
-        return this.server.getRecipesLikedBy(user);
+        return this.server.getNumberOfRecipesLikedBy(user);
     }
-//
-//    @GetMapping("/recipes/{id}")
-//    public Re getRe() {
-//
-//        return new Re(9, "abc");
-//    }
-//
-//    @PutMapping("/recipes")
-//    public void update(@RequestBody Re rec) {
-//        System.out.println(rec);
-//    }
-//
-//    @PostMapping("/recipes")
-//    public Re add(@RequestBody Re rec) {
-//        System.out.println(rec);
-//        rec.setId(11);
-//        return rec;
-//    }
-//
-//    @DeleteMapping("/recipes/{id}")
-//    public void delete(@PathVariable String id) {
-//        System.out.println("delete" + id);
-//    }
-//
-//    @GetMapping("/recipes/")
-//    public List<Re> search(@RequestParam String name) {
-//        System.out.println(name);
-//        List<Re> l = new ArrayList<>();
-//
-//        for(int i = 0; i < 3; i++) {
-//            l.add(new Re(i, name + i));
-//        }
-//
-//        return l;
-//    }
-//
+
+    @GetMapping("/liked-recipes")
+    public List<Recipe> getRecipesLikedBy(@RequestParam String user) {
+        System.out.println("get recipes liked by " + user);
+        return this.server.getRecipesLikedBY(user);
+    }
 }
