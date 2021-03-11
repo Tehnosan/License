@@ -50,7 +50,13 @@ export class ProfileHeaderComponent implements OnInit {
   }
 
   setNumberOfCookedRecipes(): void {
-    this.nrOfCookedRecipes = 2;
+    this.recipeService.getnumberOfRecipesCookedBy().subscribe(
+      (data: number) => {
+        this.nrOfCookedRecipes = data;
+      },
+      (httpErrorResponse: HttpErrorResponse) => {
+        console.log(httpErrorResponse);
+      });
   }
 
   onLikedRecipes(): void {

@@ -103,24 +103,6 @@ public class RecipeRepo {
         return null;
     }
 
-    public Integer getNumberOfRecipesLikedBy(String user) {
-        Connection connection = this.jdbc.getConnection();
-
-        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT COUNT(*) FROM Likes WHERE user = ?")) {
-            preparedStatement.setString(1, user);
-
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                while (resultSet.next()) {
-                    return resultSet.getInt(1);
-                }
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-
-        return null;
-    }
-
     public List<Recipe> getRecipesLikedBy(String username) {
         Connection connection = this.jdbc.getConnection();
         List<Recipe> recipes = new ArrayList<>();

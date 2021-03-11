@@ -94,7 +94,7 @@ public class Server {
 
     // return how many recipes user liked
     public Integer getNumberOfRecipesLikedBy(String user) {
-        return this.recipeRepo.getNumberOfRecipesLikedBy(user);
+        return this.likeRepo.getNumberOfRecipesLikedBy(user);
     }
 
     // return recipes liked by user
@@ -115,6 +115,11 @@ public class Server {
     // return ids of recipes cooked by user
     public List<Integer> getIdsOfRecipesCookedBy(String user) {
         return this.cookRepo.getIdsOfRecipesCookedBy(user);
+    }
+
+    // return how many recipes user cooked
+    public Integer getNumberOfRecipesCookedBy(String user) {
+        return this.cookRepo.getNumberOfRecipesCookedBy(user);
     }
 
     public List<String> getLoggedUsers(){

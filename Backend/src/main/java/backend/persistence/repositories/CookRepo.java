@@ -21,6 +21,7 @@ public class CookRepo {
         this.jdbcUtils = jdbcUtils;
     }
 
+    // save cook
     public Cook addCook(Cook cook) {
         Connection connection = this.jdbcUtils.getConnection();
 
@@ -38,6 +39,7 @@ public class CookRepo {
         return null;
     }
 
+    // delete cook
     public Cook deleteCook(Cook cook) {
         Connection connection = this.jdbcUtils.getConnection();
 
@@ -55,6 +57,7 @@ public class CookRepo {
         return null;
     }
 
+    // get a list with ids of recipes cooked by user
     public List<Integer> getIdsOfRecipesCookedBy(String user) {
         Connection connection = this.jdbcUtils.getConnection();
         java.util.List<java.lang.Integer> recipesID = new ArrayList<>();
@@ -71,6 +74,25 @@ public class CookRepo {
             }
 
             return recipesID;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return null;
+    }
+
+    // get how many recipes user cooked
+    public Integer getNumberOfRecipesCookedBy(String user) {
+        Connection connection = this.jdbcUtils.getConnection();
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT COUNT(*) FROM Cooks WHERE user = ?")) {
+            preparedStatement.setString(1, user);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    return resultSet.getInt(1);
+                }
+            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

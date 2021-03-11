@@ -145,4 +145,14 @@ export class RecipeService {
 
     return this.http.get<number[]>(`${this.backendUrl}/cooked-recipes-ids`, options);
   }
+
+  // get how many recipes user cooked
+  getnumberOfRecipesCookedBy(): Observable<number> {
+    let headers = this.getAuthHeaders();
+    headers = headers.set('Content-Type', 'application/json');
+
+    const options = { params: new HttpParams().set('user', this.tokenStorageService.getUsername()), headers };
+
+    return this.http.get<number>(`${this.backendUrl}/cooked-recipes-number`, options);
+  }
 }

@@ -19,6 +19,7 @@ public class LikeRepo {
         this.jdbc = jdbc;
     }
 
+    // save like to Likes table
     public Like addLike(Like like) {
         Connection connection = this.jdbc.getConnection();
 
@@ -36,6 +37,7 @@ public class LikeRepo {
         return null;
     }
 
+    // delete like from Likes table
     public Like deleteLike(Like like) {
         Connection connection = this.jdbc.getConnection();
 
@@ -53,6 +55,7 @@ public class LikeRepo {
         return null;
     }
 
+    // get a list with recipes ids liked by user
     public List<Integer> getIdsOfRecipesLikedBy(String user) {
         Connection connection = this.jdbc.getConnection();
         List<Integer> recipesID = new ArrayList<>();
@@ -69,6 +72,25 @@ public class LikeRepo {
             }
 
             return recipesID;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return null;
+    }
+
+    // get how many recipes user liked
+    public Integer getNumberOfRecipesLikedBy(String user) {
+        Connection connection = this.jdbc.getConnection();
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT COUNT(*) FROM Likes WHERE user = ?")) {
+            preparedStatement.setString(1, user);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    return resultSet.getInt(1);
+                }
+            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
