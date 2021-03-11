@@ -54,3 +54,10 @@ mat-card-content {
 .no-height {
   height: 0;
 }
+
+.relative-right {
+  position: relative;
+
+  top: -12px;
+  right: -240px;
+}
