@@ -16,20 +16,24 @@ export class RecipesComponent implements OnInit, OnChanges {
   idsOfLikedRecipes: number[] = [];
 
   idsOfCookedRecipes: number[] = [];
-  cooked: boolean[] = [];
+  cooks: boolean[] = [];
 
-  showEntireRecipe: boolean[] = Array(5).fill(false);
+  showEntireRecipe: boolean[] = [];
+
+  areLikesLoaded = false;
+  areCooksLoaded = false;
 
   constructor(private recipeService: RecipeService) {
   }
 
   // populate likes array with false
   ngOnInit(): void {
-    this.getIdsOfRecipesLiked();
-    this.likes = Array(5).fill(false);
+    // initially all recipes are restricted
+    this.showEntireRecipe = Array(this.recipes.length).fill(false);
 
-    // this.getIdsOfCookedRecipes();
-    this.cooked = Array(5).fill(false);
+    // initially all recipes are unliked and uncooked until data loads from server
+    this.likes = Array(this.recipes.length).fill(false);
+    this.cooks = Array(this.recipes.length).fill(false);
 
     // for offline use
     // this.likedRecipes.push(1);
@@ -37,8 +41,13 @@ export class RecipesComponent implements OnInit, OnChanges {
     // this.setLikes();
   }
 
+  // runs on every change of this.recipes
   ngOnChanges(changes: SimpleChanges): void {
-
+    // if this.recipes are loaded ids can be loaded from server
+    if (this.recipes.length > 0) {
+      this.getIdsOfRecipesLiked();
+      this.getIdsOfCookedRecipes();
+    }
   }
 
   // like or unlike recipe with recipeId
@@ -62,15 +71,15 @@ export class RecipesComponent implements OnInit, OnChanges {
 
   // mark recipe as cooked or uncooked
   onCookClick(index: number, recipeId: number): void {
-    if (this.cooked[index] === false) {
+    if (this.cooks[index] === false) {
       console.log('cooked');
-      this.cooked[index] = true;
+      this.cooks[index] = true;
       this.recipeService.cookRecipe(recipeId).subscribe((cook: Cook) => {
         console.log(cook);
       });
     } else {
       console.log('uncooked');
-      this.cooked[index] = false;
+      this.cooks[index] = false;
       this.recipeService.uncookedRecipe(recipeId).subscribe((cook: Cook) => {
         console.log(cook);
       });
@@ -99,17 +108,36 @@ export class RecipesComponent implements OnInit, OnChanges {
         this.likes.push(false);
       }
     }
+
+    this.areLikesLoaded = true;
   }
 
   // get ids for cooked recipes and set cooked array
-  // getIdsOfCookedRecipes(): void {
-  //
-  // }
+  getIdsOfCookedRecipes(): void {
+    this.recipeService.getIdsOfRecipesCookedBy().subscribe(
+      (data: number[]) => {
+        this.idsOfCookedRecipes = data;
+        this.setCooked();
+      }, (httpErrorResponse: HttpErrorResponse) => {
+      console.log(httpErrorResponse);
+    });
+  }
 
   // populate the boolean array cooked with true if recipe on that position is cooked or false otherwise
-  // setCooked(): void {
-  //
-  // }
+  setCooked(): void {
+    this.cooks = [];
+
+    for (const recipe of this.recipes) {
+      if (this.idsOfCookedRecipes.includes(recipe.id)) {
+        this.cooks.push(true);
+      }
+      else {
+        this.cooks.push(false);
+      }
+    }
+
+    this.areCooksLoaded = true;
+  }
 
   showFullRecipe(i: number): void {
     console.log('full recipe');

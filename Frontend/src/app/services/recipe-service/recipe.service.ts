@@ -135,4 +135,14 @@ export class RecipeService {
 
     return this.http.delete<Cook>(`${this.backendUrl}/cook`, options);
   }
+
+  // get ids for recipes cooked by user
+  getIdsOfRecipesCookedBy(): Observable<number[]> {
+    let headers = this.getAuthHeaders();
+    headers = headers.set('Content-Type', 'application/json');
+
+    const options = { params: new HttpParams().set('user', this.tokenStorageService.getUsername()), headers };
+
+    return this.http.get<number[]>(`${this.backendUrl}/cooked-recipes-ids`, options);
+  }
 }

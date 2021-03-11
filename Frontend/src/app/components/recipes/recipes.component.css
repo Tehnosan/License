@@ -17,6 +17,10 @@ img {
   fill: rgb(103, 58, 183);
 }
 
+.black {
+  fill: black;
+}
+
 mat-card {
   max-width: 368px;
   margin: auto;

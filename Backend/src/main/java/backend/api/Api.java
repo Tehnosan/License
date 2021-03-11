@@ -51,7 +51,7 @@ public class Api {
     @GetMapping("/liked-recipes-ids")
     public List<Integer> getIdsOfRecipesLikedBy(@RequestParam String user) {
         System.out.println("get ids of the recipes liked by " + user);
-        return this.server.getLikedRecipes(user);
+        return this.server.getIdsOfRecipesLikedBy(user);
     }
 
     @PutMapping("/profile-image")
@@ -82,5 +82,11 @@ public class Api {
     public Cook uncook(@RequestParam String recipeId, @RequestParam String user) {
         System.out.println(user + " uncooked " + recipeId);
         return this.server.deleteCook(new Cook(Integer.parseInt(recipeId), user));
+    }
+
+    @GetMapping("/cooked-recipes-ids")
+    public List<Integer> getIdsOfRecipesCookedBy(@RequestParam String user) {
+        System.out.println("get ids of the recipes cooked by " + user);
+        return this.server.getIdsOfRecipesCookedBy(user);
     }
 }

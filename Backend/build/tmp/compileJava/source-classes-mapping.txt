@@ -20,8 +20,8 @@ backend/authentication/securing/services/UserPrinciple.java
  backend.authentication.securing.services.UserPrinciple
 backend/authentication/securing/WebSecurityConfig.java
  backend.authentication.securing.WebSecurityConfig
-backend/persistence/repositories/LikeRepo.java
- backend.persistence.repositories.LikeRepo
+backend/domain/Cook.java
+ backend.domain.Cook
 backend/authentication/model/request/Login.java
  backend.authentication.model.request.Login
 backend/BackendApplication.java
@@ -40,9 +40,9 @@ backend/persistence/repositories/RecipeRepo.java
  backend.persistence.repositories.RecipeRepo
 backend/persistence/repositories/CookRepo.java
  backend.persistence.repositories.CookRepo
+backend/persistence/repositories/LikeRepo.java
+ backend.persistence.repositories.LikeRepo
 backend/api/Api.java
  backend.api.Api
 backend/server/Server.java
  backend.server.Server
-backend/domain/Cook.java
- backend.domain.Cook

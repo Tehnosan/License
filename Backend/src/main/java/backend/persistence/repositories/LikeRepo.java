@@ -53,7 +53,7 @@ public class LikeRepo {
         return null;
     }
 
-    public List<Integer> getLikedRecipes(String user) {
+    public List<Integer> getIdsOfRecipesLikedBy(String user) {
         Connection connection = this.jdbc.getConnection();
         List<Integer> recipesID = new ArrayList<>();
 

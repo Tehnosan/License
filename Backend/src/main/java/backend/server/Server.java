@@ -83,8 +83,8 @@ public class Server {
     }
 
     // return ids of recipes liked by user
-    public List<Integer> getLikedRecipes(String user) {
-        return this.likeRepo.getLikedRecipes(user);
+    public List<Integer> getIdsOfRecipesLikedBy(String user) {
+        return this.likeRepo.getIdsOfRecipesLikedBy(user);
     }
 
     // update profile image of user
@@ -110,6 +110,11 @@ public class Server {
     // delete cook from db
     public Cook deleteCook(Cook cook) {
         return this.cookRepo.deleteCook(cook);
+    }
+
+    // return ids of recipes cooked by user
+    public List<Integer> getIdsOfRecipesCookedBy(String user) {
+        return this.cookRepo.getIdsOfRecipesCookedBy(user);
     }
 
     public List<String> getLoggedUsers(){

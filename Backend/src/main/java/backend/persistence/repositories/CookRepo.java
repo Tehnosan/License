@@ -7,7 +7,10 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 public class CookRepo {
@@ -21,7 +24,7 @@ public class CookRepo {
     public Cook addCook(Cook cook) {
         Connection connection = this.jdbcUtils.getConnection();
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Cooked VALUES (?, ?)")) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Cooks VALUES (?, ?)")) {
             preparedStatement.setInt(1, cook.getRecipeId());
             preparedStatement.setString(2, cook.getUser());
 
@@ -38,7 +41,7 @@ public class CookRepo {
     public Cook deleteCook(Cook cook) {
         Connection connection = this.jdbcUtils.getConnection();
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM Cooked WHERE recipeID = ? AND user  = ?")) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM Cooks WHERE recipeID = ? AND user  = ?")) {
             preparedStatement.setInt(1, cook.getRecipeId());
             preparedStatement.setString(2, cook.getUser());
 
@@ -47,6 +50,29 @@ public class CookRepo {
             return cook;
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public List<Integer> getIdsOfRecipesCookedBy(String user) {
+        Connection connection = this.jdbcUtils.getConnection();
+        java.util.List<java.lang.Integer> recipesID = new ArrayList<>();
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Cooks WHERE user = ?")){
+            preparedStatement.setString(1, user);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    java.lang.Integer recipeId = resultSet.getInt("recipeID");
+
+                    recipesID.add(recipeId);
+                }
+            }
+
+            return recipesID;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
 
         return null;
