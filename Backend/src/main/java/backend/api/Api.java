@@ -115,4 +115,11 @@ public class Api {
         System.out.println("get recipes cooked by " + user);
         return this.server.getRecipesCookedBY(user);
     }
+
+    // delete like from db
+    @DeleteMapping("/recipe")
+    public boolean deleteRecipe(@RequestParam String recipeId) {
+        System.out.println("delete " + recipeId);
+        return this.server.deleteRecipeWithRecipeId(Integer.parseInt(recipeId));
+    }
 }

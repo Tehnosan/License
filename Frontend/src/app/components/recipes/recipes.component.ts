@@ -4,6 +4,7 @@ import {RecipeService} from '../../services/recipe-service/recipe.service';
 import {Like} from '../../models/like';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Cook} from '../../models/cook';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-recipes',
@@ -23,7 +24,7 @@ export class RecipesComponent implements OnInit, OnChanges {
   areLikesLoaded = false;
   areCooksLoaded = false;
 
-  constructor(private recipeService: RecipeService) {
+  constructor(private recipeService: RecipeService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -32,19 +33,19 @@ export class RecipesComponent implements OnInit, OnChanges {
     // this.likedRecipes.push(5);
     // this.setLikes();
 
-    this.recipes.push({ id: 1, user: 'Sandrino', name: 'Recipe1', url: 'assets/car.jpg',
-      steps: 'step1-step2-step3', quantities: 'q1-q2', ingredients: 'ingredient1-ingredient2' });
-    this.recipes.push({ id: 2, user: 'Sandrino', name: 'Recipe2', url: 'assets/car.jpg',
-      steps: 'step', quantities: 'quantity', ingredients: 'ingredient' });
-    this.recipes.push({ id: 3, user: 'admin', name: 'Recipe3', url: 'assets/car.jpg',
-      steps: 'Se incalzeste cuptorul la 180g-Se baga in cuptor', quantities: '3 buc-250 ml-350 g', ingredients: 'oua-lapte-faina' });
-    this.recipes.push({ id: 4, user: 'Sandrino', name: 'Recipe4', url: 'assets/car.jpg',
-      steps: 'step1-step2', quantities: 'q1-q2-q3', ingredients: 'ingredient1-ingredient2-ingredient3' });
-    this.recipes.push({ id: 5, user: 'Sandrino', name: 'Recipe5', url: 'assets/car.jpg',
-      steps: 'step', quantities: 'quantity', ingredients: 'ingredient' });
-
-    this.areLikesLoaded = true;
-    this.areCooksLoaded = true;
+    // this.recipes.push({ id: 1, user: 'Sandrino', name: 'Recipe1', url: 'assets/car.jpg',
+    //   steps: 'step1-step2-step3', quantities: 'q1-q2', ingredients: 'ingredient1-ingredient2' });
+    // this.recipes.push({ id: 2, user: 'Sandrino', name: 'Recipe2', url: 'assets/car.jpg',
+    //   steps: 'step', quantities: 'quantity', ingredients: 'ingredient' });
+    // this.recipes.push({ id: 3, user: 'admin', name: 'Recipe3', url: 'assets/car.jpg',
+    //   steps: 'Se incalzeste cuptorul la 180g-Se baga in cuptor', quantities: '3 buc-250 ml-350 g', ingredients: 'oua-lapte-faina' });
+    // this.recipes.push({ id: 4, user: 'Sandrino', name: 'Recipe4', url: 'assets/car.jpg',
+    //   steps: 'step1-step2', quantities: 'q1-q2-q3', ingredients: 'ingredient1-ingredient2-ingredient3' });
+    // this.recipes.push({ id: 5, user: 'Sandrino', name: 'Recipe5', url: 'assets/car.jpg',
+    //   steps: 'step', quantities: 'quantity', ingredients: 'ingredient' });
+    //
+    // this.areLikesLoaded = true;
+    // this.areCooksLoaded = true;
   }
 
   // runs on every change of this.recipes
@@ -166,8 +167,14 @@ export class RecipesComponent implements OnInit, OnChanges {
 
   // delete recipe with recipeId
   onDelete(index: number, recipeId: number): void {
-    this.recipes.splice(index, 1);
-    console.log(this.recipes);
-    console.log(this.likes);
+    this.recipeService.deleteRecipeWith(recipeId).subscribe(
+      (data: boolean) => {
+        const url = this.router.url;
+        this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+          this.router.navigate([url]);
+        });
+      }, (httpErrorResponse: HttpErrorResponse) => {
+        console.log(httpErrorResponse);
+      });
   }
 }

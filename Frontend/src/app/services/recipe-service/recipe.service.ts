@@ -165,4 +165,14 @@ export class RecipeService {
 
     return this.http.get<Recipe[]>(`${this.backendUrl}/cooked-recipes`,  options);
   }
+
+  // delete recipe with recipeId
+  deleteRecipeWith(recipeId: number): Observable<boolean> {
+    let headers = this.getAuthHeaders();
+    headers = headers.set('Content-Type', 'application/json');
+
+    const options = { params: new HttpParams().set('recipeId', recipeId.toString()), headers };
+
+    return this.http.delete<boolean>(`${this.backendUrl}/recipe`, options);
+  }
 }

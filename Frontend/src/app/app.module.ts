@@ -19,7 +19,6 @@ import { SignUpPageComponent } from './components/sign-up-page/sign-up-page.comp
 import { CropperComponent } from './components/cropper/cropper.component';
 import { UploadImageComponent } from './components/profile-page/upload-image/upload-image.component';
 import { RecipesPageComponent } from './components/recipes-page/recipes-page.component';
-import { DotsCommandsComponent } from './components/dots-commands/dots-commands.component';
 
 
 
@@ -37,8 +36,7 @@ import { DotsCommandsComponent } from './components/dots-commands/dots-commands.
     SignUpPageComponent,
     CropperComponent,
     UploadImageComponent,
-    RecipesPageComponent,
-    DotsCommandsComponent
+    RecipesPageComponent
   ],
   imports: [
       HttpClientModule,

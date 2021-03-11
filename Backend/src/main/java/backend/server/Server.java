@@ -127,6 +127,11 @@ public class Server {
         return this.recipeRepo.getRecipesCookedBy(user);
     }
 
+    // delete recipe with recipeId
+    public boolean deleteRecipeWithRecipeId(Integer recipeId) {
+        return this.recipeRepo.deleteRecipeWithRecipeId(recipeId);
+    }
+
     public List<String> getLoggedUsers(){
         return this.loggedUsers;
     }
