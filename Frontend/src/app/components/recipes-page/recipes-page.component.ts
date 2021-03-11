@@ -10,7 +10,7 @@ import {RecipeService} from '../../services/recipe-service/recipe.service';
   styleUrls: ['./recipes-page.component.css']
 })
 export class RecipesPageComponent implements OnInit {
-  recipes: Recipe[];
+  recipes: Recipe[] = [];
 
   constructor(private route: ActivatedRoute, private recipeService: RecipeService) { }
 
@@ -21,12 +21,11 @@ export class RecipesPageComponent implements OnInit {
 
       // get recipes depending on type
       if (type === 'liked') {
-        console.log('acum incarc retetele');
         this.getAndSetLikedRecipes();
       }
-      // else if (type === 'cooked') {
-      //   this.
-      // }
+      else if (type === 'cooked') {
+        this.getAndSetCookedRecipes();
+      }
     });
   }
 
@@ -40,8 +39,13 @@ export class RecipesPageComponent implements OnInit {
       });
   }
 
-  // get and set this.recipes with recipes cokked by user
-  // getAndSetCookedRecipes(): void {
-  //
-  // }
+  // get and set this.recipes with recipes cooked by user
+  getAndSetCookedRecipes(): void {
+    this.recipeService.getRecipesCookedBy().subscribe(
+      (data: Recipe[]) => {
+        this.recipes = data;
+      }, (httpErrorResponse: HttpErrorResponse) => {
+        console.log(httpErrorResponse);
+      });
+  }
 }

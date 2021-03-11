@@ -1,5 +1,7 @@
 backend/authentication/repo/UserRepo.java
  backend.authentication.repo.UserRepo
+backend/persistence/repositories/CookRepo.java
+ backend.persistence.repositories.CookRepo
 backend/authentication/model/response/ResponseMessage.java
  backend.authentication.model.response.ResponseMessage
 backend/domain/Like.java
@@ -10,18 +12,18 @@ backend/authentication/securing/jwt/JwtAuthTokenFilter.java
  backend.authentication.securing.jwt.JwtAuthTokenFilter
 backend/persistence/database_connectivity/JdbcUtils.java
  backend.persistence.database_connectivity.JdbcUtils
-backend/authentication/securing/jwt/JwtProvider.java
- backend.authentication.securing.jwt.JwtProvider
+backend/api/Api.java
+ backend.api.Api
 backend/authentication/model/User.java
  backend.authentication.model.User
 backend/authentication/AuthApi.java
  backend.authentication.AuthApi
-backend/authentication/securing/services/UserPrinciple.java
- backend.authentication.securing.services.UserPrinciple
+backend/persistence/repositories/RecipeRepo.java
+ backend.persistence.repositories.RecipeRepo
 backend/authentication/securing/WebSecurityConfig.java
  backend.authentication.securing.WebSecurityConfig
-backend/domain/Cook.java
- backend.domain.Cook
+backend/persistence/repositories/LikeRepo.java
+ backend.persistence.repositories.LikeRepo
 backend/authentication/model/request/Login.java
  backend.authentication.model.request.Login
 backend/BackendApplication.java
@@ -34,15 +36,13 @@ backend/authentication/model/request/SignUp.java
  backend.authentication.model.request.SignUp
 backend/authentication/securing/services/UserDetailsServiceImpl.java
  backend.authentication.securing.services.UserDetailsServiceImpl
-backend/domain/Recipe.java
- backend.domain.Recipe
-backend/persistence/repositories/CookRepo.java
- backend.persistence.repositories.CookRepo
-backend/persistence/repositories/LikeRepo.java
- backend.persistence.repositories.LikeRepo
-backend/api/Api.java
- backend.api.Api
 backend/server/Server.java
  backend.server.Server
-backend/persistence/repositories/RecipeRepo.java
- backend.persistence.repositories.RecipeRepo
+backend/authentication/securing/services/UserPrinciple.java
+ backend.authentication.securing.services.UserPrinciple
+backend/domain/Recipe.java
+ backend.domain.Recipe
+backend/domain/Cook.java
+ backend.domain.Cook
+backend/authentication/securing/jwt/JwtProvider.java
+ backend.authentication.securing.jwt.JwtProvider

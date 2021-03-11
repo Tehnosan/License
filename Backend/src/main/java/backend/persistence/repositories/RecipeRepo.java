@@ -18,6 +18,7 @@ public class RecipeRepo {
         this.jdbc = jdbc;
     }
 
+    // get a list of recipes not posted by user
     public List<Recipe> getHomeRecipes(String username) {
         Connection connection = this.jdbc.getConnection();
         List<Recipe> recipes = new ArrayList<>();
@@ -47,6 +48,7 @@ public class RecipeRepo {
         return null;
     }
 
+    // get a list with recipes posted by user
     public List<Recipe> getProfileRecipes(String username) {
         Connection connection = this.jdbc.getConnection();
         List<Recipe> recipes = new ArrayList<>();
@@ -76,6 +78,7 @@ public class RecipeRepo {
         return null;
     }
 
+    // save recipe
     public Recipe addRecipe(Recipe recipe) {
         Connection connection = this.jdbc.getConnection();
 
@@ -103,6 +106,7 @@ public class RecipeRepo {
         return null;
     }
 
+    // get a list of recipes liked by user
     public List<Recipe> getRecipesLikedBy(String username) {
         Connection connection = this.jdbc.getConnection();
         List<Recipe> recipes = new ArrayList<>();
@@ -112,6 +116,42 @@ public class RecipeRepo {
                 "inner join Likes L\n" +
                 "on R.id = L.recipeID\n" +
                 "where l.user = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(statement)) {
+            preparedStatement.setString(1, username);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Integer id = resultSet.getInt("id");
+                    String name = resultSet.getString("name");
+                    String url = resultSet.getString("url");
+                    String ingredients = resultSet.getString("ingredients");
+                    String quantities = resultSet.getString("quantities");
+                    String steps = resultSet.getString("steps");
+                    String user = resultSet.getString("user");
+
+                    recipes.add(new Recipe(id, name, url, ingredients, quantities, steps, user));
+                }
+            }
+
+            return recipes;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return null;
+    }
+
+    // get a list of recipes cooked by user
+    public List<Recipe> getRecipesCookedBy(String username) {
+        Connection connection = this.jdbc.getConnection();
+        List<Recipe> recipes = new ArrayList<>();
+
+        String statement = "select *\n" +
+                "from Recipes R\n" +
+                "inner join Cooks C\n" +
+                "on R.id = C.recipeID\n" +
+                "where c.user = ?";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(statement)) {
             preparedStatement.setString(1, username);

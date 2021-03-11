@@ -59,7 +59,13 @@ export class ProfileHeaderComponent implements OnInit {
       });
   }
 
+  // navigate to liked recipes
   onLikedRecipes(): void {
     this.router.navigate(['/recipes', { type: 'liked' }]);
+  }
+
+  // navigate to cooked recipes
+  onCookedRecipes(): void {
+    this.router.navigate(['/recipes', { type: 'cooked' }]);
   }
 }

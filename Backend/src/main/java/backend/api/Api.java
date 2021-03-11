@@ -108,4 +108,11 @@ public class Api {
         System.out.println("get number of recipes cooked by " + user);
         return this.server.getNumberOfRecipesCookedBy(user);
     }
+
+    // get a list of recipes liked by user
+    @GetMapping("/cooked-recipes")
+    public List<Recipe> getRecipesCookedBy(@RequestParam String user) {
+        System.out.println("get recipes cooked by " + user);
+        return this.server.getRecipesCookedBY(user);
+    }
 }

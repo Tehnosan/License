@@ -26,15 +26,7 @@ export class RecipesComponent implements OnInit, OnChanges {
   constructor(private recipeService: RecipeService) {
   }
 
-  // populate likes array with false
   ngOnInit(): void {
-    // initially all recipes are restricted
-    this.showEntireRecipe = Array(this.recipes.length).fill(false);
-
-    // initially all recipes are unliked and uncooked until data loads from server
-    this.likes = Array(this.recipes.length).fill(false);
-    this.cooks = Array(this.recipes.length).fill(false);
-
     // for offline use
     // this.likedRecipes.push(1);
     // this.likedRecipes.push(5);
@@ -45,6 +37,9 @@ export class RecipesComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     // if this.recipes are loaded ids can be loaded from server
     if (this.recipes.length > 0) {
+      // initially all recipes are restricted
+      this.showEntireRecipe = Array(this.recipes.length).fill(false);
+
       this.getIdsOfRecipesLiked();
       this.getIdsOfCookedRecipes();
     }

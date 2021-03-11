@@ -122,6 +122,11 @@ public class Server {
         return this.cookRepo.getNumberOfRecipesCookedBy(user);
     }
 
+    // return recipes cooked by user
+    public List<Recipe> getRecipesCookedBY(String user) {
+        return this.recipeRepo.getRecipesCookedBy(user);
+    }
+
     public List<String> getLoggedUsers(){
         return this.loggedUsers;
     }
