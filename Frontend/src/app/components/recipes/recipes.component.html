@@ -4,17 +4,17 @@
       <mat-card-title>{{recipe.name}}</mat-card-title>
     </mat-card-header>
 
-    <div class="no-height">
+    <div class="no-height" *ngIf="currentUrl === '/profile'">
       <button mat-icon-button [disableRipple]="true" class="relative-right" [matMenuTriggerFor]="menu">
         <mat-icon>more_vert</mat-icon>
       </button>
 
       <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="onDelete(i, recipe.id)">
+        <button mat-menu-item (click)="onDelete(recipe.id)">
           <mat-icon>delete</mat-icon>
           <span>Delete recipe</span>
         </button>
-        <button mat-menu-item>
+        <button mat-menu-item (click)="onUpdate(recipe)">
           <mat-icon>edit</mat-icon>
           <span>Update recipe</span>
         </button>

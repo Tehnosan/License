@@ -1,12 +1,13 @@
 import {
   Component,
-  ElementRef,
+  ElementRef, EventEmitter,
   OnInit,
   ViewChild
 } from '@angular/core';
 import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, NgForm, ValidatorFn, Validators} from '@angular/forms';
 import {RecipeService} from '../../../services/recipe-service/recipe.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Recipe} from '../../../models/recipe';
 
 @Component({
   selector: 'app-add-recipe-form',
@@ -16,6 +17,7 @@ import {Router} from '@angular/router';
 export class AddRecipeFormComponent implements OnInit {
   @ViewChild('fileInput') fileInput: ElementRef;
   fileAttr = 'Choose File';
+  optionalUrl: string;
 
   imageURL = '';
   imageChangedEvent: any = '';
@@ -26,7 +28,11 @@ export class AddRecipeFormComponent implements OnInit {
   stepsError = false;
   generalError = false;
 
-  constructor(private formBuilder: FormBuilder, private recipeService: RecipeService, private router: Router){
+  update = false;
+  recipeIdToUpdate: number;
+
+  constructor(private formBuilder: FormBuilder, private recipeService: RecipeService,
+              private router: Router, private route: ActivatedRoute){
   }
 
   ngOnInit(): void {
@@ -37,6 +43,14 @@ export class AddRecipeFormComponent implements OnInit {
       ingredients: new FormArray([], [Validators.required]),  // array with the ingredients
       steps: new FormArray([], [Validators.required])  // array with the steps
     });
+
+    // get recipe needed to update from url
+    const recipe = JSON.parse(this.route.snapshot.paramMap.get('recipe')) as Recipe;
+    // if recipe exists initialize form with recipe properties and set update to true
+    if (recipe !== null) {
+      this.initForm(recipe);
+      this.update = true;
+    }
   }
 
   // get controls of the recipe form
@@ -99,11 +113,22 @@ export class AddRecipeFormComponent implements OnInit {
       quantitiesAsString = quantitiesAsString.slice(0, -1);
       stepsAsString = stepsAsString.slice(0, -1);
 
-      console.log('added');
-      this.recipeService.addRecipe(this.getFormControls.name.value, this.imageURL, ingredientsNames, quantitiesAsString,
-        stepsAsString).subscribe(res => console.log(res));
+      // call update or add
+      if (this.update === true) {
+        this.recipeService.updateRecipe(this.recipeIdToUpdate, this.getFormControls.name.value, this.imageURL,
+          ingredientsNames, quantitiesAsString, stepsAsString).subscribe(res => console.log(res));
+        console.log('updated');
 
-      this.router.navigateByUrl('/home');
+        this.router.navigateByUrl('/profile');
+      }
+      else {
+        this.recipeService.addRecipe(this.getFormControls.name.value, this.imageURL, ingredientsNames, quantitiesAsString,
+          stepsAsString).subscribe(res => console.log(res));
+        console.log('added');
+
+        this.router.navigateByUrl('/home');
+      }
+      // console.log(this.getFormControls.name.value);
       // console.log(ingredientsNames);
       // console.log(quantitiesAsString);
       // console.log(stepsAsString);
@@ -164,5 +189,25 @@ export class AddRecipeFormComponent implements OnInit {
       }
       return null;
     };
+  }
+
+  initForm(recipe: Recipe): void {
+    this.recipeIdToUpdate = recipe.id;
+    this.recipeForm.get('name').setValue(recipe.name);
+    this.optionalUrl = recipe.url;
+
+    const zip = (list1, list2) => list1.map((x, i) => [x, list2[i]]);
+    for (const [ingredient, quantity] of zip(recipe.ingredients.split('-'), recipe.quantities.split('-'))) {
+      this.addNewIngredient();
+
+      this.getIngredients.at(this.getIngredients.length - 1).get('ingredient').setValue(ingredient);
+      this.getIngredients.at(this.getIngredients.length - 1).get('quantity').setValue(quantity);
+    }
+
+    for (const step of recipe.steps.split('-')) {
+      this.addNewStep();
+
+      this.getSteps.at(this.getSteps.length - 1).get('step').setValue(step);
+    }
   }
 }

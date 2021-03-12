@@ -24,7 +24,10 @@ export class RecipesComponent implements OnInit, OnChanges {
   areLikesLoaded = false;
   areCooksLoaded = false;
 
+  currentUrl: string;
+
   constructor(private recipeService: RecipeService, private router: Router) {
+    this.currentUrl = this.router.url;
   }
 
   ngOnInit(): void {
@@ -166,15 +169,19 @@ export class RecipesComponent implements OnInit, OnChanges {
   }
 
   // delete recipe with recipeId
-  onDelete(index: number, recipeId: number): void {
+  onDelete(recipeId: number): void {
     this.recipeService.deleteRecipeWith(recipeId).subscribe(
       (data: boolean) => {
-        const url = this.router.url;
         this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-          this.router.navigate([url]);
+          this.router.navigate([this.currentUrl]);
         });
       }, (httpErrorResponse: HttpErrorResponse) => {
         console.log(httpErrorResponse);
       });
+  }
+
+  onUpdate(recipe: Recipe): void {
+    console.log(recipe.id);
+    this.router.navigate(['/add', { recipe: JSON.stringify(recipe) }], { skipLocationChange: true });
   }
 }

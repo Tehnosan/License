@@ -122,4 +122,11 @@ public class Api {
         System.out.println("delete " + recipeId);
         return this.server.deleteRecipeWithRecipeId(Integer.parseInt(recipeId));
     }
+
+    // update recipe
+    @PutMapping("/recipe")
+    public Recipe updateRecipe(@RequestBody Recipe recipe) {
+        System.out.println("update recipe " + recipe.getName());
+        return this.server.updateRecipe(recipe);
+    }
 }

@@ -194,4 +194,33 @@ public class RecipeRepo {
 
         return null;
     }
+
+    // update recipe
+    public Recipe updateRecipe(Recipe recipe) {
+        Connection connection = this.jdbc.getConnection();
+
+        String statement = "UPDATE Recipes SET " +
+                "name  = ?," +
+                "url = ?," +
+                "ingredients = ?," +
+                "quantities = ?," +
+                "steps = ? WHERE id = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(statement)) {
+            preparedStatement.setString(1, recipe.getName());
+            preparedStatement.setString(2, recipe.getUrl());
+            preparedStatement.setString(3, recipe.getIngredients());
+            preparedStatement.setString(4, recipe.getQuantities());
+            preparedStatement.setString(5, recipe.getSteps());
+            preparedStatement.setInt(6, recipe.getId());
+
+            preparedStatement.executeUpdate();
+
+            return recipe;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 }

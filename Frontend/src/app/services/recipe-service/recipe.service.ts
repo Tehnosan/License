@@ -175,4 +175,14 @@ export class RecipeService {
 
     return this.http.delete<boolean>(`${this.backendUrl}/recipe`, options);
   }
+
+  // update recipe
+  updateRecipe(id: number, name: string, url: string, ingredients: string, quantities: string, steps: string): Observable<Recipe> {
+    let headers = this.getAuthHeaders();
+    headers = headers.set('Content-Type', 'application/json');
+
+    const recipe: Recipe = { id, name, url, ingredients, quantities, steps, user: this.tokenStorageService.getUsername() };
+
+    return this.http.put<Recipe>(`${this.backendUrl}/recipe`, recipe, { headers });
+  }
 }

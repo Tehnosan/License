@@ -9,6 +9,7 @@ import {ImageCroppedEvent, ImageTransform} from 'ngx-image-cropper';
 export class CropperComponent implements OnInit {
   @Input() imageChangedEvent: any = '';
   @Input() roundCropper = false;
+  @Input() url: string;
   showCropper = false;
   containWithinAspectRatio = false;
   transform: ImageTransform = {};

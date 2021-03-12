@@ -132,6 +132,11 @@ public class Server {
         return this.recipeRepo.deleteRecipeWithRecipeId(recipeId);
     }
 
+    // update recipe
+    public Recipe updateRecipe(Recipe recipe) {
+        return this.recipeRepo.updateRecipe(recipe);
+    }
+
     public List<String> getLoggedUsers(){
         return this.loggedUsers;
     }
