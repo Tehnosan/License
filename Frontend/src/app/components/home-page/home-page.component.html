@@ -1,7 +1,12 @@
 <app-navbar></app-navbar>
 
 <div class="outer">
-  <app-recipes [recipes]="recipes"></app-recipes>
+  <div class="input-wrapper">
+    <mat-icon class="icon">search</mat-icon>
+    <input type="text" id="search" placeholder="Search by" [(ngModel)]="searchTextRealTimeValue" (keyup)="verifyStopTyping()"/>
+  </div>
+
+  <app-recipes [recipes]="recipes" [searchText]="filterSearchText"></app-recipes>
 
   <div class="add-button">
     <button mat-mini-fab color="primary" (click)="handleAddButton()">

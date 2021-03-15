@@ -19,6 +19,7 @@ import { SignUpPageComponent } from './components/sign-up-page/sign-up-page.comp
 import { CropperComponent } from './components/cropper/cropper.component';
 import { UploadImageComponent } from './components/profile-page/upload-image/upload-image.component';
 import { RecipesPageComponent } from './components/recipes-page/recipes-page.component';
+import { FilterPipe } from './services/filter-pipe/filter.pipe';
 
 
 
@@ -36,7 +37,8 @@ import { RecipesPageComponent } from './components/recipes-page/recipes-page.com
     SignUpPageComponent,
     CropperComponent,
     UploadImageComponent,
-    RecipesPageComponent
+    RecipesPageComponent,
+    FilterPipe
   ],
   imports: [
       HttpClientModule,

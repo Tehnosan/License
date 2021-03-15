@@ -10,3 +10,45 @@
 
   background-image: linear-gradient(to right top, white, rgb(255, 247, 185));
 }
+
+.input-wrapper{
+  width: 900px;
+  height: 0;
+
+  position: relative;
+  top: -52px;
+}
+
+.input-wrapper input#search{
+  padding-left: 45px;
+
+  width: 75px;
+  height: 40px;
+
+  border-radius: 50px;
+  border: none;
+
+  background: white;
+
+  transition: all .55s ease;
+}
+
+.input-wrapper input#search:hover, .input-wrapper input#search:focus, .input-wrapper input#search:active{
+  outline: none;
+  width: 300px;
+}
+
+.input-wrapper .icon{
+  position: relative;
+  right: -35px;
+  bottom: -8px;
+
+  color: rgb(103, 58, 183);
+  z-index: 1;
+}
+
+.input-wrapper:hover .icon{
+  color: rgba(103, 58, 183, 0.7);
+
+  transform:scale(1.5);
+}

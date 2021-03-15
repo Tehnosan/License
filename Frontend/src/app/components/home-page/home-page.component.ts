@@ -12,6 +12,9 @@ import {Router} from '@angular/router';
 export class HomePageComponent implements OnInit {
   recipes: Recipe[] = [];
 
+  searchTextRealTimeValue = '';
+  filterSearchText = '';
+
   constructor(private recipeService: RecipeService, private router: Router) { }
 
   ngOnInit(): void {
@@ -30,6 +33,7 @@ export class HomePageComponent implements OnInit {
     //   steps: 'step', quantities: 'quantity', ingredients: 'ingredient' });
   }
 
+  // get home recipes
   getRecipes(): void {
     this.recipeService.getHomeRecipes()
       .subscribe(
@@ -42,7 +46,19 @@ export class HomePageComponent implements OnInit {
         });
   }
 
+  // navigate to add recipe page
   handleAddButton(): void {
     this.router.navigateByUrl('/add');
+  }
+
+  // send recipes to be filtered 0.5s after user has stopped typing
+  verifyStopTyping(): void {
+    const localSearchText = this.searchTextRealTimeValue;
+
+    setTimeout(() => {
+      if (localSearchText === this.searchTextRealTimeValue) {
+        this.filterSearchText = localSearchText;
+      }
+    }, 500);
   }
 }

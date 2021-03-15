@@ -13,11 +13,13 @@ import {Router} from '@angular/router';
 })
 export class RecipesComponent implements OnInit, OnChanges {
   @Input() recipes: Recipe[];
-  likes: boolean[] = [];
+  @Input() searchText: string;
+
+  likes: Map<number, boolean>;
   idsOfLikedRecipes: number[] = [];
 
   idsOfCookedRecipes: number[] = [];
-  cooks: boolean[] = [];
+  cooks: Map<number, boolean>;
 
   showEntireRecipe: boolean[] = [];
 
@@ -36,15 +38,15 @@ export class RecipesComponent implements OnInit, OnChanges {
     // this.likedRecipes.push(5);
     // this.setLikes();
 
-    // this.recipes.push({ id: 1, user: 'Sandrino', name: 'Recipe1', url: 'assets/car.jpg',
+    // this.recipes.push({ id: 1, user: 'Sandrino', name: 'Lava Cake', url: 'assets/car.jpg',
     //   steps: 'step1-step2-step3', quantities: 'q1-q2', ingredients: 'ingredient1-ingredient2' });
-    // this.recipes.push({ id: 2, user: 'Sandrino', name: 'Recipe2', url: 'assets/car.jpg',
+    // this.recipes.push({ id: 2, user: 'Sandrino', name: 'Lasagna', url: 'assets/car.jpg',
     //   steps: 'step', quantities: 'quantity', ingredients: 'ingredient' });
-    // this.recipes.push({ id: 3, user: 'admin', name: 'Recipe3', url: 'assets/car.jpg',
+    // this.recipes.push({ id: 3, user: 'admin', name: 'Ciorba', url: 'assets/car.jpg',
     //   steps: 'Se incalzeste cuptorul la 180g-Se baga in cuptor', quantities: '3 buc-250 ml-350 g', ingredients: 'oua-lapte-faina' });
-    // this.recipes.push({ id: 4, user: 'Sandrino', name: 'Recipe4', url: 'assets/car.jpg',
+    // this.recipes.push({ id: 4, user: 'Sandrino', name: 'Sarmale', url: 'assets/car.jpg',
     //   steps: 'step1-step2', quantities: 'q1-q2-q3', ingredients: 'ingredient1-ingredient2-ingredient3' });
-    // this.recipes.push({ id: 5, user: 'Sandrino', name: 'Recipe5', url: 'assets/car.jpg',
+    // this.recipes.push({ id: 5, user: 'Sandrino', name: 'Raclette', url: 'assets/car.jpg',
     //   steps: 'step', quantities: 'quantity', ingredients: 'ingredient' });
     //
     // this.areLikesLoaded = true;
@@ -64,18 +66,16 @@ export class RecipesComponent implements OnInit, OnChanges {
   }
 
   // like or unlike recipe with recipeId
-  onHeartClick(index: number, recipeId: number): void {
-    // this.likes[index] = this.likes[index] !== true;
-
-    if (this.likes[index] === false) {
+  onHeartClick(recipeId: number): void {
+    if (this.likes.get(recipeId) === false) {
       console.log('like');
-      this.likes[index] = true;
+      this.likes.set(recipeId, true);
       this.recipeService.likeRecipe(recipeId).subscribe((like: Like) => {
         console.log(like);
       });
     } else {
       console.log('unlike');
-      this.likes[index] = false;
+      this.likes.set(recipeId, false);
       this.recipeService.unlikeRecipe(recipeId).subscribe((like: Like) => {
         console.log(like);
       });
@@ -83,16 +83,16 @@ export class RecipesComponent implements OnInit, OnChanges {
   }
 
   // mark recipe as cooked or uncooked
-  onCookClick(index: number, recipeId: number): void {
-    if (this.cooks[index] === false) {
+  onCookClick(recipeId: number): void {
+    if (this.cooks.get(recipeId) === false) {
       console.log('cooked');
-      this.cooks[index] = true;
+      this.cooks.set(recipeId, true);
       this.recipeService.cookRecipe(recipeId).subscribe((cook: Cook) => {
         console.log(cook);
       });
     } else {
       console.log('uncooked');
-      this.cooks[index] = false;
+      this.cooks.set(recipeId, false);
       this.recipeService.uncookedRecipe(recipeId).subscribe((cook: Cook) => {
         console.log(cook);
       });
@@ -112,13 +112,14 @@ export class RecipesComponent implements OnInit, OnChanges {
 
   // populate the boolean array likes with true if recipe it's liked or false otherwise
   setLikes(): void {
-    this.likes = [];
+    this.likes = new Map<number, boolean>();
 
     for (const recipe of this.recipes) {
       if (this.idsOfLikedRecipes.includes(recipe.id)) {
-        this.likes.push(true);
-      } else {
-        this.likes.push(false);
+        this.likes.set(recipe.id, true);
+      }
+      else {
+        this.likes.set(recipe.id, false);
       }
     }
 
@@ -138,14 +139,14 @@ export class RecipesComponent implements OnInit, OnChanges {
 
   // populate the boolean array cooked with true if recipe on that position is cooked or false otherwise
   setCooked(): void {
-    this.cooks = [];
+    this.cooks = new Map<number, boolean>();
 
     for (const recipe of this.recipes) {
       if (this.idsOfCookedRecipes.includes(recipe.id)) {
-        this.cooks.push(true);
+        this.cooks.set(recipe.id, true);
       }
       else {
-        this.cooks.push(false);
+        this.cooks.set(recipe.id, false);
       }
     }
 
@@ -180,6 +181,7 @@ export class RecipesComponent implements OnInit, OnChanges {
       });
   }
 
+  // update recipe
   onUpdate(recipe: Recipe): void {
     console.log(recipe.id);
     this.router.navigate(['/add', { recipe: JSON.stringify(recipe) }], { skipLocationChange: true });
