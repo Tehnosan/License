@@ -116,7 +116,7 @@ public class Api {
         return this.server.getRecipesCookedBY(user);
     }
 
-    // delete like from db
+    // delete recipe from db
     @DeleteMapping("/recipe")
     public boolean deleteRecipe(@RequestParam String recipeId) {
         System.out.println("delete " + recipeId);

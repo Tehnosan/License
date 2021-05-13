@@ -69,15 +69,19 @@ export class RecipesComponent implements OnInit, OnChanges {
   onHeartClick(recipeId: number): void {
     if (this.likes.get(recipeId) === false) {
       console.log('like');
-      this.likes.set(recipeId, true);
       this.recipeService.likeRecipe(recipeId).subscribe((like: Like) => {
         console.log(like);
+        if (like) {
+          this.likes.set(recipeId, true);
+        }
       });
     } else {
       console.log('unlike');
-      this.likes.set(recipeId, false);
       this.recipeService.unlikeRecipe(recipeId).subscribe((like: Like) => {
         console.log(like);
+        if (like) {
+          this.likes.set(recipeId, false);
+        }
       });
     }
   }
@@ -173,9 +177,11 @@ export class RecipesComponent implements OnInit, OnChanges {
   onDelete(recipeId: number): void {
     this.recipeService.deleteRecipeWith(recipeId).subscribe(
       (data: boolean) => {
-        this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-          this.router.navigate([this.currentUrl]);
-        });
+        if (data === true) {
+          this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+            this.router.navigate([this.currentUrl]);
+          });
+        }
       }, (httpErrorResponse: HttpErrorResponse) => {
         console.log(httpErrorResponse);
       });
