@@ -14,12 +14,13 @@ export class AuthGuardService implements CanActivate {
     // get the auth token from localStorage
     const token = this.tokenStorageService.getToken();
 
-    // check if token is set, then...
+    // check if token is set and return true, else return false
     return !!token;
   }
 
   // if user is logged in is permitted acces to page else access is restricted
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):
+    Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return new Promise((resolve, reject) => {
       if (this.isAuthenticated()) {
         return resolve(true);

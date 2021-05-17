@@ -20,7 +20,8 @@
 }
 
 .main-wrapper {
-  width: 100%;
+  /*width: 100%;*/
+  width: 400px;
 }
 
 .flex-wrapper {
@@ -53,7 +54,8 @@
 
 .bottom {
   height: 100%;
-  width: 50%;
+  /*width: 50%;*/
+  width: 100%;
 
   display: flex;
 
@@ -63,6 +65,10 @@
 .bottom-left {
   justify-content: flex-end;
   margin-right: 25px;
+}
+
+.bottom-center {
+  justify-content: center;
 }
 
 .bottom-right {
