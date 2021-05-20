@@ -36,8 +36,8 @@
       <mat-card-title class="bottom-margin">Ingredients</mat-card-title>
       <div class="bottom-margin">
         <div *ngFor="let element of ingredientsAndQuantities(recipe.ingredients, recipe.quantities)" class="inline">
-          <p>{{element[0]}}</p>
-          <p>{{element[1]}}</p>
+          <p class="half-width">{{element[0]}}</p>
+          <p class="half-width">{{element[1]}}</p>
         </div>
       </div>
       <mat-card-title class="bottom-margin">Steps</mat-card-title>

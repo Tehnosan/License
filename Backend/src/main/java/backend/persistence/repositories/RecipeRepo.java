@@ -107,20 +107,43 @@ public class RecipeRepo {
     }
 
     // delete recipe with recipeId
+    // delete likes with recipeId
+    // delete cooks with recipeId
     public boolean deleteRecipeWithRecipeId(Integer recipeId) {
+        int nr = 0;
         Connection connection = this.jdbc.getConnection();
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement("DELETE  FROM Recipes WHERE id = ?")) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM Recipes WHERE id = ?")) {
             preparedStatement.setInt(1, recipeId);
 
             preparedStatement.executeUpdate();
 
-            return true;
+            nr++;
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return false;
+        try (PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM Likes WHERE recipeId = ?")) {
+            preparedStatement.setInt(1, recipeId);
+
+            preparedStatement.executeUpdate();
+
+            nr++;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM Cooks WHERE recipeId = ?")) {
+            preparedStatement.setInt(1, recipeId);
+
+            preparedStatement.executeUpdate();
+
+            nr++;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return nr == 3;
     }
 
     // get a list of recipes liked by user

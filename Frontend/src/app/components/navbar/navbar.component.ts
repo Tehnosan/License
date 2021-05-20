@@ -19,11 +19,21 @@ export class NavbarComponent implements OnInit {
   }
 
   goToProfile(): void {
-    this.router.navigateByUrl('profile');
+    if (window.location.pathname === '/profile') {
+      window.location.reload();
+    }
+    else {
+      this.router.navigateByUrl('profile');
+    }
   }
 
   goHome(): void {
-    this.router.navigateByUrl('home');
+    if (window.location.pathname === '/home') {
+      window.location.reload();
+    }
+    else {
+      this.router.navigateByUrl('home');
+    }
   }
 
   logout(): void {

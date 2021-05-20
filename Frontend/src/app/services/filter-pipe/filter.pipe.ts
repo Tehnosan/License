@@ -22,7 +22,7 @@ export class FilterPipe implements PipeTransform {
     for (const word of words) {
       items = items.filter(item => {
         return item.name.toLocaleLowerCase().includes(word) ||
-          item.ingredients.includes(word);
+          item.ingredients.toLocaleLowerCase().includes(word);
       });
     }
 

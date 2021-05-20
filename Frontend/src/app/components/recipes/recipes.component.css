@@ -32,12 +32,16 @@ mat-card-content {
 
 .inline {
   display: flex;
-  line-height: 10px;
+  /*line-height: 10px;*/
+  line-height: 125%;
 }
 
 .inline p:nth-child(2) {
-  width: 100%;
   text-align: right;
+}
+
+.half-width {
+  width: 50%;
 }
 
 .bottom-margin {

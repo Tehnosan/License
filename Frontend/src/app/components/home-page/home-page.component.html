@@ -3,7 +3,7 @@
 <div class="outer">
   <div class="input-wrapper">
     <mat-icon class="icon">search</mat-icon>
-    <input type="text" id="search" placeholder="Search by" [(ngModel)]="searchTextRealTimeValue" (keyup)="verifyStopTyping()"/>
+    <input type="text" id="search" placeholder="Search by name, ingredients" [(ngModel)]="searchTextRealTimeValue" (keyup)="verifyStopTyping()"/>
   </div>
 
   <app-recipes [recipes]="recipes" [searchText]="filterSearchText"></app-recipes>
